@@ -1,0 +1,192 @@
+:root {
+    --primary: #10b981;
+    --input-bg: #334155;
+    --input-border: #475569;
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --error-red: #ef4444;
+    --success-green: #22c55e;
+    --google-button-bg: #ffffff;
+    --google-button-hover: #f8fafc;
+    --google-button-text: #1f2937;
+}
+
+#login-form #google-signin-button {
+    max-width: 420px; /* Mantém o container com largura total se desejado, ou pode ser auto */
+    display: flex; /* Usa flexbox para alinhar o conteúdo */
+    justify-content: center; /* Centraliza o botão do Google horizontalmente */
+    align-items: center; /* Centraliza verticalmente se houver altura definida */
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#login-form #google-signin-button {
+    width: 100%; /* Garante que o div ocupa a largura do seu container */
+    display: block; /* Garante que ele se comporta como um bloco e respeita a largura */
+    /* Remova margin-top e margin-bottom daqui, pois já adicionei no seletor acima para o #google-signin-button */
+}
+
+/* Se você tem um wrapper externo, garanta que ele também esteja ok */
+.google-button-wrapper { /* Se você decidir manter este wrapper externo */
+    width: 100%;
+    display: flex;
+    justify-content: center; /* Centraliza o botão se ele não for 100% do wrapper */
+}
+
+.google-div {
+    overflow: hidden;
+
+}
+
+/* Inputs */
+.form-group {
+    margin-bottom: 1.25rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background: var(--input-bg);
+    border: 1px solid var(--input-border);
+    border-radius: 0.75rem;
+    color: var(--text-primary);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
+}
+
+/* Feedbacks */
+.feedback {
+    margin-bottom: 1rem;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    font-size: 0.9rem;
+    display: none;
+}
+
+.feedback.success {
+    background-color: #dcfce7;
+    color: var(--success-green);
+}
+
+.feedback.error {
+    background-color: #fee2e2;
+    color: var(--error-red);
+}
+
+.input-error {
+    border: 2px solid var(--error-red) !important;
+}
+
+.input-success {
+    border: 2px solid var(--success-green) !important;
+}
+
+
+
+/* Divider */
+.divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 1.25rem;
+}
+
+.divider::before,
+.divider::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid var(--input-border);
+}
+
+.divider span {
+    padding: 0 1rem;
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+}
+
+/* Lembrar / Esqueci */
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.25rem;
+}
+
+.remember-me {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+}
+
+.forgot-password {
+    color: var(--primary);
+    font-size: 0.875rem;
+    text-decoration: none;
+}
+
+/* Botão submit */
+.login-button {
+    width: 100%;
+    padding: 0.875rem;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 0.75rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.login-button:hover {
+    background: #0f9b77;
+}
+
+/* Link Cadastro */
+.signup-link {
+    text-align: center;
+    margin-top: 1.5rem;
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+}
+
+.signup-link a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    20% { transform: translateX(-5px); }
+    40% { transform: translateX(5px); }
+    60% { transform: translateX(-5px); }
+    80% { transform: translateX(5px); }
+    100% { transform: translateX(0); }
+}
+
+.shake {
+    animation: shake 0.5s ease;
+}
+
+#toast-container {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 9999;
+}

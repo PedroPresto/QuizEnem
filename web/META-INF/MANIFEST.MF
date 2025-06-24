@@ -1,0 +1,31 @@
+Manifest-Version: 1.0
+Implementation-Title: Servlet and JDO extensions to the Google API Cli
+ ent Library for Java.
+Bundle-Description: Servlet extensions to the Google APIs Client Libra
+ ry for Java
+Automatic-Module-Name: google.api.client.servlet
+Bundle-License: http://www.apache.org/licenses/LICENSE-2.0.txt
+Bundle-SymbolicName: com.google.api.client.servlet
+Implementation-Version: 2.0.0
+Bnd-LastModified: 1657808033971
+Bundle-ManifestVersion: 2
+Bundle-DocURL: https://googleapis.dev/java/google-api-client/2.0.0/ind
+ ex.html
+Bundle-Vendor: Google
+Import-Package: com.google.api.client.googleapis.notifications;version
+ ="[2.0,3)",com.google.api.client.util;version="[1.42,2)",com.google.a
+ pi.client.util.store;version="[1.42,2)",javax.servlet,javax.servlet.h
+ ttp
+Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.7))"
+Tool: Bnd-6.2.0.202202251641
+Implementation-Vendor: Google
+Export-Package: com.google.api.client.googleapis.extensions.servlet.no
+ tifications;uses:="com.google.api.client.googleapis.notifications,com
+ .google.api.client.util.store,javax.servlet,javax.servlet.http";versi
+ on="2.0.0"
+Bundle-Name: Servlet and JDO extensions to the Google API Client Libra
+ ry for Java.
+Bundle-Version: 2.0.0
+Build-Jdk-Spec: 1.8
+Created-By: Apache Maven Bundle Plugin 5.1.6
+

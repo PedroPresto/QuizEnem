@@ -1,0 +1,447 @@
+/* Menu Variables */
+:root {
+    --menu-width: 250px;
+    --primary-color: #10b981;
+    --menu-bg: #1a1a1a;
+    --menu-secondary-bg: #252525;
+    --menu-hover-bg: #333333;
+    --menu-text: #f0f0f0;
+    --menu-secondary-text: #a0a0a0;
+    --menu-accent: #646cff;
+    --menu-accent-hover: #535bf2;
+    --menu-avatar-bg: #333333;
+    --menu-premium-btn: linear-gradient(135deg, #646cff, #535bf2);
+    --menu-login-btn: #3a3a3a;
+    --menu-transition: 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    --menu-border-radius: 12px;
+    --menu-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    --menu-icon-size: 1.2rem;
+
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 24px;
+    --space-xl: 32px;
+}
+
+/* Menu Button (Hamburger) */
+.menu-button {
+    touch-action: manipulation;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 1000;
+    transition:
+        background-color var(--menu-transition),
+        transform var(--menu-transition);
+}
+
+.menu-button:hover {
+    background-color: var(--menu-hover-bg);
+    transform: scale(1.05);
+}
+
+.menu-button:active {
+    transform: scale(0.95);
+}
+
+.hamburger {
+    width: 23px;
+    height: 20px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.hamburger span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: var(--menu-text);
+    border-radius: 2px;
+    transition: transform var(--menu-transition), opacity var(--menu-transition);
+}
+
+/* Hamburger Animation */
+.menu-button.active .hamburger span:nth-child(1) {
+    transform: translateY(10px) rotate(45deg);
+}
+
+.menu-button.active .hamburger span:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-button.active .hamburger span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+/* Menu Overlay */
+.menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(3px);
+    z-index: 998;
+    opacity: 0;
+    visibility: hidden;
+    transition:
+        opacity var(--menu-transition),
+        visibility var(--menu-transition);
+}
+
+.menu-overlay.visible {
+    opacity: 1;
+    visibility: visible;
+
+}
+
+/* Side Menu */
+.side-menu {
+    position: fixed;
+    top: 0;
+    left: 0; /* â† Agora deixamos o menu sempre posicionado na lateral */
+    width: var(--menu-width);
+    height: 100%;
+    background: linear-gradient(145deg, var(--menu-bg), var(--menu-secondary-bg));
+    box-shadow: var(--menu-shadow);
+    z-index: 999;
+    transition: transform var(--menu-transition);
+    transform: translateX(-105%); /* â† Aqui Ã© o que realmente "esconde" o menu */
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
+    border-top-right-radius: 16px;
+    border-bottom-right-radius: 16px;
+}
+
+.side-menu.open {
+    transform: translateX(0); /* â† Aparece como mÃ¡gica */
+}
+
+
+/* Menu Header */
+.menu-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-md);
+    padding-top: 1px;
+    padding-bottom: 1px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.menu-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--menu-text);
+}
+
+.menu-close-btn {
+    background: none;
+    border: none;
+    color: var(--menu-secondary-text);
+    font-size: 1.5rem;
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease;
+}
+
+.menu-close-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--menu-text);
+}
+
+/* Menu Sections */
+.menu-section {
+    padding: var(--space-md);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.rodape {
+    position: absolute;
+    bottom: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);   
+    width: 100%;
+}
+
+.section-title {
+    color: var(--menu-secondary-text);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: var(--space-sm);
+    font-weight: 600;
+}
+
+/* User Profile Section */
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.avatar-container {
+    flex-shrink: 0;
+}
+
+.avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background-color: var(--menu-avatar-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--menu-text);
+    font-weight: 600;
+    font-size: 1.3rem;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.avatar-img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+
+.avatar:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(100, 108, 255, 0.6);
+}
+
+.user-info {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.user-name {
+    font-weight: 600;
+    color: var(--menu-text);
+    font-size: 1rem;
+}
+
+/* Buttons */
+.menu-btn {
+    padding: var(--space-xs) var(--space-md);
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+    border: none;
+    text-align: center;
+}
+
+.menu-btn:hover {
+    transform: translateY(-1px);
+}
+
+.menu-btn:active {
+    transform: translateY(1px);
+}
+
+.premium-btn {
+    background: var(--menu-premium-btn);
+    color: white;
+    border: none;
+}
+
+.premium-label {
+    background: var(--menu-premium-btn);
+    color: white;
+    font-weight: bold;
+    border: 1px solid #e5c100;
+    cursor: default;
+}
+
+
+.login-btn {
+    background-color: var(--menu-login-btn);
+    color: var(--menu-text);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Menu List */
+.menu-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    padding: var(--space-sm) var(--space-md);
+    margin: var(--space-xs) 0;
+    border-radius: var(--menu-border-radius);
+    color: var(--menu-text);
+    font-size: 1rem;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+    cursor: pointer;
+    padding-left: var(--space-sm);
+    padding-right: var(--space-sm);  
+}
+
+.menu-item:hover {
+    background-color: var(--menu-hover-bg);
+}
+
+.menu-item .icon {
+    margin-right: 8px;
+    min-width: 18px;
+    color: white; /* ou #6b6b6b se quiser mais neutro */
+}
+
+.icon {
+    margin-right: var(--space-md);
+    font-size: var(--menu-icon-size);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+}
+
+/* Logout special styling */
+.menu-item.logout {
+    color: #ff6b6b;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 480px) {
+    .menu-section {
+        padding: var(--space-sm);
+    }
+
+    .menu-item {
+        padding-left: var(--space-sm);
+        padding-right: var(--space-sm);
+    }
+
+    .user-profile {
+        gap: var(--space-sm);
+    }
+}
+
+
+/* Animation for menu items */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.menu-list li {
+    animation: fadeIn 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    animation-fill-mode: both;
+}
+
+.menu-list li:nth-child(1) {
+    animation-delay: 0.1s;
+}
+.menu-list li:nth-child(2) {
+    animation-delay: 0.15s;
+}
+.menu-list li:nth-child(3) {
+    animation-delay: 0.2s;
+}
+.menu-list li:nth-child(4) {
+    animation-delay: 0.25s;
+}
+.menu-list li:nth-child(5) {
+    animation-delay: 0.3s;
+}
+
+[data-theme="dark"] {
+    --background-color: #0f172a;
+    --card-background: #1e293b;
+    --bg-input: #1f2937;
+    --bg-secondary: #059669;
+    --primary-color: #059669;
+    --text-primary: #f3f4f6;
+    --text-secondary: #9ca3af;
+    --border-color: #374151;
+    --tag-background: rgba(99, 102, 241, 0.1);
+}
+
+
+.my-sw-text {
+    line-height: 1.5;
+}
+
+.my-sw-title {
+    line-height: 1.3;
+}
+
+.menu-item.disabled {
+    pointer-events: none;
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.shine-btn {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.shine-btn::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(
+        120deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.25) 50%,
+        rgba(255, 255, 255, 0) 100%
+        );
+    transform: skewX(-20deg);
+    animation: shine 4s ease-in-out infinite;
+    z-index: 2;
+}
+
+@keyframes shine {
+    0% {
+        left: -100%;
+    }
+    100% {
+        left: 120%;
+    }
+}
