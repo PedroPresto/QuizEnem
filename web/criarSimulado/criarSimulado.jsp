@@ -43,8 +43,8 @@
                 </section>
 
                 <section class="subjects-container">
-                    <h2>Matérias</h2>
-                    <p class="section-desc">Selecione a quantidade de questões para cada matéria (0-20)</p>
+                    <h2>Matï¿½rias</h2>
+                    <p class="section-desc">Selecione a quantidade de questï¿½es para cada matï¿½ria (0-20)</p>
 
                     <div id="subjectsList" class="subjects-list">
                         <!-- Subjects will be dynamically inserted here by JavaScript -->
@@ -57,7 +57,7 @@
                 <section class="summary-section">
                     <div class="test-summary">
                         <div class="summary-item">
-                            <span>Total de questões</span>
+                            <span>Total de questï¿½es</span>
                             <span id="totalQuestions">0</span>
                         </div>
                         <div class="summary-item">
@@ -76,6 +76,12 @@
     </div>
 
     <script src="js/store.js"></script>
+        <script>
+            // Configura o tipo de simulado para a pÃ¡gina criarSimulado.jsp
+            document.addEventListener('DOMContentLoaded', () => {
+                store.setSimulationType('bySubjectAndYear');
+            });
+        </script>
     <script src="js/subjects.js"></script>
     <script src="js/yearSelector.js"></script>
     <script src="js/subjectCounter.js"></script>

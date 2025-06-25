@@ -69,6 +69,7 @@ function initializeStartButton() {
  * Handle start button click
  */
 function handleStartButtonClick() {
+    console.log("sooooooou eu!!!!");
     resetarEstatisticas();
     if (store.canStartSimulator()) {
     const state = store.getState();
@@ -80,7 +81,15 @@ function handleStartButtonClick() {
       ano: state.selectedYear
     }));
 
-    fetch(`${contextPath}/getIdsQuestoesSubMaterias`, {
+        let targetServletUrl;
+        // Decide qual Servlet chamar com base no tipo de simulado
+        if (state.simulationType === 'bySubSubject') {
+            targetServletUrl = `${contextPath}/getIdsQuestoesSubMaterias`;
+        } else { // Padrão: 'bySubjectAndYear'
+            targetServletUrl = `${contextPath}/getIdsQuestoes`;
+        }
+
+    fetch(targetServletUrl, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

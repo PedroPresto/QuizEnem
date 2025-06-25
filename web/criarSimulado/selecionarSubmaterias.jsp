@@ -61,6 +61,12 @@
 
 <%-- Carregar os scripts JavaScript que serão reutilizados --%>
 <script src="${pageContext.request.contextPath}/criarSimulado/js/store.js"></script>
+<script>
+    // Configura o tipo de simulado para a página selecionarSubmaterias.jsp
+    document.addEventListener('DOMContentLoaded', () => {
+        store.setSimulationType('bySubSubject');
+    });
+</script>
 <%-- Por enquanto, vamos copiar as funções essenciais para este script,
      para garantir que elas rodem ANTES das que dependem delas.
      Idealmente, refatoraríamos subjects.js e summary.js para serem mais genéricos. --%>

@@ -244,7 +244,8 @@ function checkAnswer() {
 function iniciarSimulado(materiaId, qQntd) {
     resetarEstatisticas();
 
-    const anoSelecionado = "aleatorio"; // ou pegue dinamicamente de algum estado
+    const anoSelecionado = store.getState().selectedYear;  // ou pegue dinamicamente de algum estado
+    console.log("Valor de 'anoSelecionado' para o POST:", anoSelecionado);
 
     const requestData = [{
             id: parseInt(materiaId),
