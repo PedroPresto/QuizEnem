@@ -4,10 +4,11 @@
 <!DOCTYPE html>
 <html lang="pt-br" data-theme="dark">
 <head>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/criarSimulado/criarSimulado.css">
     <jsp:include page="/includes/head.jsp" /> <%-- Inclui seu head.jsp global --%>
     <title>Quiz Enem - Selecionar Disciplinas</title>
     <%-- Reutiliza o CSS do criarSimulado.jsp como base --%>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/criarSimulado/criarSimulado.css">
+
     <%-- Se quiser estilos específicos para esta página sem afetar criarSimulado.css, adicione um novo link CSS aqui --%>
 </head>
 <body>
@@ -39,23 +40,25 @@
         <%-- Por enquanto, seguiremos o fluxo mais simples (ano aleatório para sub-matérias). --%>
 
         <%-- Seção de Resumo e Botão Iniciar (reutiliza IDs do criarSimulado.jsp) --%>
-        <section class="summary-section">
-            <h2>Resumo do Simulado</h2>
-            <div class="test-summary">
-                <div class="summary-item">
-                    <span>Questões:</span>
-                    <span id="totalQuestions">0</span>
+        <div class="summary-card">
+            <section class="summary-section">
+                <div class="test-summary">
+                    <div class="summary-item">
+                        <span>Total de questões</span>
+                        <span id="totalQuestions">0</span>
+                    </div>
+                    <div class="summary-item">
+                        <span>Tempo estimado</span>
+                        <span id="estimatedTime">0 min</span>
+                    </div>
                 </div>
-                <div class="summary-item">
-                    <span>Tempo Estimado:</span>
-                    <span id="estimatedTime">0 min</span>
-                </div>
-            </div>
+            </section>
             <button id="startButton" class="start-button" disabled>
                 <span class="button-text">Iniciar Simulado</span>
-                <i class="fas fa-play button-icon"></i>
+                <span class="button-icon"></span>
             </button>
-        </section>
+
+        </div>
     </div>
 </div>
 

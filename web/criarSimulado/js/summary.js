@@ -69,55 +69,57 @@ function initializeStartButton() {
  * Handle start button click
  */
 function handleStartButtonClick() {
-    console.log("sooooooou eu!!!!");
+    console.log("sooooooou eu!!!!"); // Mantido para depuração
     resetarEstatisticas();
     if (store.canStartSimulator()) {
-    const state = store.getState();
-    const activeSubjects = store.getActiveSubjects();
+        const state = store.getState();
+        const activeSubjects = store.getActiveSubjects();
 
-    const requestData = activeSubjects.map(subject => ({
-      id: parseInt(subject.id),
-      quantidade: subject.questionCount,
-      ano: state.selectedYear
-    }));
+        const requestData = activeSubjects.map(subject => ({
+            id: parseInt(subject.id),
+            quantidade: subject.questionCount,
+            // NOVO: Condição para enviar 'aleatorio' para o ano quando é 'byMainSubjectOnly'
+            ano: state.simulationType === 'byMainSubjectOnly' ? 'aleatorio' : state.selectedYear
+        }));
 
         let targetServletUrl;
         // Decide qual Servlet chamar com base no tipo de simulado
         if (state.simulationType === 'bySubSubject') {
             targetServletUrl = `${contextPath}/getIdsQuestoesSubMaterias`;
-        } else { // Padrão: 'bySubjectAndYear'
+        } else { // Padrão: 'bySubjectAndYear' ou o novo 'byMainSubjectOnly'
             targetServletUrl = `${contextPath}/getIdsQuestoes`;
         }
 
-    fetch(targetServletUrl, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(requestData)
-    })
-    .then(res => res.json())
-    .then(mapaQuestoes => {
-      const todasIds = Object.values(mapaQuestoes).flat();
-      const idsParam = todasIds.join(",");
+        fetch(targetServletUrl, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(requestData)
+        })
+            .then(res => res.json())
+            .then(mapaQuestoes => {
+                const todasIds = Object.values(mapaQuestoes).flat();
+                const idsParam = todasIds.join(",");
 
-      // Também salva no localStorage se quiser manter tracking local
-      localStorage.setItem("idsQuestoes", idsParam);
-      localStorage.setItem("qQntd", todasIds.length);
-      localStorage.setItem("anoSimulado", state.selectedYear);
-      localStorage.setItem("materiasSelecionadas", JSON.stringify(mapaQuestoes));
+                // Também salva no localStorage se quiser manter tracking local
+                localStorage.setItem("idsQuestoes", idsParam);
+                localStorage.setItem("qQntd", todasIds.length);
+                localStorage.setItem("anoSimulado", state.selectedYear); // O ano salvo ainda será o do store, que pode ser o padrão se não houver slider de ano.
+                localStorage.setItem("materiasSelecionadas", JSON.stringify(mapaQuestoes));
 
-        console.log("IDs de Questões no localStorage:", localStorage.getItem("idsQuestoes"));
+                console.log("IDs de Questões no localStorage:", localStorage.getItem("idsQuestoes")); // Mantido para depuração
 
-      // Redireciona via GET com parâmetros na URL
-      window.location.href = `${contextPath}/iniciarSimulado?ids=${idsParam}&ano=${state.selectedYear}&indice=0`;
-    })
-    .catch(err => {
-      console.error("Erro ao buscar IDs:", err);
-      alert("Erro ao iniciar simulado. Tente novamente.");
-    });
-  }
+                // Redireciona via GET com parâmetros na URL
+                window.location.href = `${contextPath}/iniciarSimulado?ids=${idsParam}&ano=${state.selectedYear}&indice=0`;
+            })
+            .catch(err => {
+                console.error("Erro ao buscar IDs:", err);
+                alert("Erro ao iniciar simulado. Tente novamente.");
+            });
+    }
 }
+
 
 function resetarEstatisticas() {
     // Salva o tema atual

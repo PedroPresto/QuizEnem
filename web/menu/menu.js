@@ -601,7 +601,7 @@ function handleMenuItemClick(e) {
             irRetomarSimulado();
             break;
         case 'criarSimulado':
-            window.location.href = contextPath + "/criarSimulado/criarSimulado.jsp"; // <- sua função customizada
+            window.location.href = contextPath + "/criarSimulado/simuladoLivre.jsp"; // <- sua função customizada
             break;
         case 'logout':
             fazerLogout();

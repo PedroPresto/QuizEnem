@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
     
     selecionarQuestoes("provasAnteriores");
 
-    setupSubjectCardClick("dev-card", "1"); // Exemplo para o card 'dev-test'
+    //setupSubjectCardClick("dev-card", "1"); // Exemplo para o card 'dev-test'
     setupSubjectCardClick("cardLinguagens", "3"); // ID 3 para Português (Linguagens e Códigos)
     setupSubjectCardClick("cardMatematica", "10"); // ID 10 para Matemática
     setupSubjectCardClick("cardFisica", "12");
@@ -29,6 +29,16 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         }
     }
+
+    // Para o novo card "Monte sua prova do seu jeito"
+    const devCardButton = document.getElementById('dev-card');
+    if (devCardButton) {
+        devCardButton.addEventListener('click', () => {
+            // Você adicionaria o link para sua nova página aqui
+            window.location.href = `${contextPath}/criarSimulado/simuladoLivre.jsp`; // <-- Este é o link que você precisa adicionar
+        });
+    }
+
 
 
     function setupSubjectCardClick(cardId, materiaId) {

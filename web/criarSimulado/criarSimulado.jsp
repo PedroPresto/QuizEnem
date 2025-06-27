@@ -1,5 +1,7 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br" data-theme="dark">
     <head>
 
         <style>
@@ -43,7 +45,7 @@
                 </section>
 
                 <section class="subjects-container">
-                    <h2>Mat�rias</h2>
+                    <h2>Matérias</h2>
                     <p class="section-desc">Selecione a quantidade de quest�es para cada mat�ria (0-20)</p>
 
                     <div id="subjectsList" class="subjects-list">
@@ -57,7 +59,7 @@
                 <section class="summary-section">
                     <div class="test-summary">
                         <div class="summary-item">
-                            <span>Total de quest�es</span>
+                            <span>Total de questões</span>
                             <span id="totalQuestions">0</span>
                         </div>
                         <div class="summary-item">
