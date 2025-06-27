@@ -46,7 +46,7 @@
 
                 <section class="subjects-container">
                     <h2>Matérias</h2>
-                    <p class="section-desc">Selecione a quantidade de quest�es para cada mat�ria (0-20)</p>
+                    <p class="section-desc">Selecione a quantidade de questões para cada matéria (0-20)</p>
 
                     <div id="subjectsList" class="subjects-list">
                         <!-- Subjects will be dynamically inserted here by JavaScript -->
