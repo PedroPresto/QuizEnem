@@ -7,7 +7,7 @@
         <meta name="theme-color" content="#0F172A">
         <%@ include file="/includes/head.jsp"%>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Simulado Enem Online com Questões Comentadas | Quiz Enem</title>
+        <title>Quiz Enem | Simulado Enem Online com Questões Comentadas</title>
         <meta name="description" content="Treine para o Enem com simulados gratuitos, questões comentadas por especialistas e estatísticas personalizadas. Pratique agora no Quiz Enem!">
         <meta name="keywords" content="simulado Enem, Enem online, questões comentadas Enem, prova Enem, estudar para o Enem, Quiz Enem, questões personalizadas">
         

@@ -257,16 +257,9 @@ function criarFormularioLogin() {
             </p>
           </form>
         `,
-                customClass: {
-                    title: 'my-sw-title',
-                    popup: 'my-swal',
-                    // confirmButton: 'my-sw-confirm',
-                    // cancelButton: 'my-sw-cancel',
-                    htmlContainer: 'my-sw-text'
-                },
-                // opcionalmente, controle animações de show/hide se precisar de classes especiais:
+
                 showClass: {
-                    popup: 'animate__animated animate__fadeUp' // já tem nossa animação via CSS
+                    popup: 'animate__animated animate__fadeIn' // já tem nossa animação via CSS
                 },
                 hideClass: {
                     popup: 'animate__animated animate__fadeOut' // ou use outra animação
@@ -279,6 +272,7 @@ function criarFormularioLogin() {
                     setupAutenticacaoListeners();
                     // Agora sim: só renderiza o botão depois que o DOM foi montado
                     const googleBtn = document.getElementById('google-signin-button');
+
                     if (window.google && googleBtn) {
                         google.accounts.id.initialize({
                             auto_select: true,
@@ -292,6 +286,7 @@ function criarFormularioLogin() {
                                 theme: 'outline',
                                 size: 'large',
                                 shape: 'square',
+                                text: 'Entrar com Google',
                                 logo_alignment: 'left',
                                 width: "350"
                             }
@@ -534,7 +529,7 @@ function goPremium() {
         html: `
     <p style="margin-bottom: 1em;">Assine para desbloquear recursos avançados:</p>
     <ul style="text-align: left; list-style: none; padding-left: 0; font-size: 1.1rem;>
-      <li style="margin-bottom: 0.5em;"><i class="fa-regular fa-circle-check" style="color: #10b981; margin-right: 0.2em;"></i> Acesso a <strong>950+ questões</strong> comentadas</li>
+      <li style="margin-bottom: 0.5em;"><i class="fa-regular fa-circle-check" style="color: #10b981; margin-right: 0.2em;"></i> Acesso a <strong>13456+ questões</strong> comentadas</li>
       <li style="margin-bottom: 0.5em; margin-top: 0.5em;"><i class="fa-regular fa-circle-check" style="color: #10b981; margin-right: 0.2em;"></i> Revisão inteligente com gráficos de desempenho</li>
       <li style="margin-bottom: 0.5em;"><i class="fa-regular fa-circle-check" style="color: #10b981; margin-right: 0.2em;"></i> Criação de <strong>simulados personalizados</strong></li>
       <li style="margin-bottom: 0.5em;"><i class="fa-regular fa-circle-check" style="color: #10b981; margin-right: 0.2em;"></i> Estatísticas detalhadas por matéria</li>
@@ -558,7 +553,7 @@ function goPremium() {
         },
         // opcionalmente, controle animações de show/hide se precisar de classes especiais:
         showClass: {
-            popup: '' // já tem nossa animação via CSS
+            popup: 'animate__animated animate__fadeIn' // já tem nossa animação via CSS
         },
         hideClass: {
             popup: 'animate__animated animate__fadeOut animate__faster' // ou use outra animação

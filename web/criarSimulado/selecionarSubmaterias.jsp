@@ -19,8 +19,6 @@
             <p class="subtitle">Escolha as disciplinas para montar seu simulado.</p>
         </header>
 
-        <%-- Título que exibirá o nome da matéria principal (ex: Português) --%>
-        <h2 id="mainSubjectTitle" class="section-title"></h2>
 
         <section class="subjects-container">
             <p class="section-desc">Defina a quantidade de questões para cada disciplina:</p>
