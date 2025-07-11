@@ -60,6 +60,10 @@ public class GetQuestaoServlet extends HttpServlet {
             adminFeedback(request, idQuestao);
             sessao.setAttribute("anexoTexto", getAnexoTexto(idQuestao));
             sessao.setAttribute("comentarioQuestao", getComentarioQuestao(idQuestao));
+
+            String anexoImagem = getAnexoImagem(idQuestao);
+            sessao.setAttribute("anexoImagem", anexoImagem);
+
         } catch (SQLException ex) {
             Logger.getLogger(proximaQuestao.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -98,6 +102,9 @@ public class GetQuestaoServlet extends HttpServlet {
         json.addProperty("numeroQuestao", numeroQuestao);
         json.addProperty("materialQuestao", materialQuestao);
 
+        String anexoImagemJson = (String) sessao.getAttribute("anexoImagem");
+        json.addProperty("anexoImagem", anexoImagemJson);
+
         response.setContentType("application/json;charset=UTF-8");
         response.getWriter().write(json.toString());
 
@@ -123,6 +130,17 @@ public class GetQuestaoServlet extends HttpServlet {
 
             try (ResultSet rs = st.executeQuery()) {
                 return rs.next() ? rs.getString("anexo_texto") : "Desculpe, esse conteúdo está indisponível no momento";
+            }
+        }
+    }
+
+    public String getAnexoImagem(int idQuestao) throws SQLException {
+        String sql = "SELECT anexo_imagem FROM questoes WHERE id = ?";
+        try (Connection conecta = DBConnection.getConnection(); PreparedStatement st = conecta.prepareStatement(sql)) {
+            st.setInt(1, idQuestao);
+            try (ResultSet rs = st.executeQuery()) {
+                // Retorna o caminho da imagem se encontrar, senão retorna null
+                return rs.next() ? rs.getString("anexo_imagem") : null;
             }
         }
     }

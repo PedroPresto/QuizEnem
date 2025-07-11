@@ -10,7 +10,7 @@
 
 <div class="form-group" id="campoNome" style="display: none;">
     <label for="nome">Nome e Sobrenome</label>
-    <input type="text" id="nome" name="nome" pattern="[A-Za-z�-�\\s]{5,}" placeholder="Seu nome e sobrenome">
+    <input type="text" id="nome" name="nome" pattern="[A-Za-z-\\s]{5,}" placeholder="Seu nome e sobrenome">
 </div>
 
 <div class="form-group">

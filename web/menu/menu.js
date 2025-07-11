@@ -328,7 +328,6 @@ function irRevisao() {
 
 function irRetomarSimulado() {
     let materia = localStorage.getItem("materia");
-
     let qQntd = localStorage.getItem("qQntd");
     if (materia && qQntd) {
         Swal.fire({

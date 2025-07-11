@@ -39,7 +39,7 @@
                         <div class="exam-card">
                             <div class="exam-card-header">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
-                                <h3>Revisite os Enems passados</h3>
+                                <h3>Edições passadas do Enem</h3>
                             </div>
                             <p>Resolva questões oficiais do Enem com comentários explicativos.</p>
                             <div class="exam-stats">
@@ -77,11 +77,11 @@
 
                         <div class="subject-card" id="cardLinguagens">
                             <i class="fa-solid fa-spell-check"></i>
-                            <h3>Linguagens, Códigos e suas Tecnologias</h3>
+                            <h3>Português</h3>
                             <span>248 questões</span>
                         </div>
 
-                        <div class="subject-card">
+                        <div class="subject-card"  id="cardMatematica">
                             <i class="fa-solid fa-not-equal"></i>
                             <h3>Matemática</h3>
                             <span>312 questões</span>

@@ -1,6 +1,6 @@
-<!DOCTYPE html> <html lang="pt-br">
-    <head>
-        <title>Questões Enem - O maior simulado de questões para o Enem!</title>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<head>
+        <title>QuestÃµes Enem - O maior simulado de questÃµes para o Enem!</title>
         <meta name="theme-color" content="#0F172A">
         <link rel="stylesheet" href="css/style.css">
         <%@ include file="/includes/head.jsp"%>
@@ -27,7 +27,7 @@
                     <div class="tag-container">
 
                         <span class="tag">
-                            <!-- ícone de livro aberto -->
+                            <!-- ï¿½cone de livro aberto -->
                             <svg class="tag-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m0-12c-1.333 1.333-4 2-8 2v12c4 0 6.667-.667 8-2m0-12c1.333 1.333 4 2 8 2v12c-4 0-6.667-.667-8-2" />
                             </svg>
@@ -36,15 +36,15 @@
 
 
                         <span class="tag" id="questaoAtualFront">
-                            <!-- ícone de checklist -->
+                            <!-- ï¿½cone de checklist -->
                             <svg class="tag-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M9 5h11M9 12h11M9 19h11M4 5h.01M4 12h.01M4 19h.01" />
                             </svg>
-                            <span id="questaoTexto">Questão 1 de <%= session.getAttribute("qQntd")%></span>
+                            <span id="questaoTexto">Questï¿½o 1 de <%= session.getAttribute("qQntd")%></span>
                         </span>
                         
                         <span class="tag" id="questaoAtualFront">
-                            <!-- ícone de checklist -->
+                            <!-- ï¿½cone de checklist -->
                             <svg class="tag-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M9 5h11M9 12h11M9 19h11M4 5h.01M4 12h.01M4 19h.01" />
                             </svg>
@@ -52,7 +52,7 @@
                         </span>
                         
                         <span class="tag" id="questaoAtualFront">
-                            <!-- ícone de checklist -->
+                            <!-- ï¿½cone de checklist -->
                             <svg class="tag-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M9 5h11M9 12h11M9 19h11M4 5h.01M4 12h.01M4 19h.01" />
                             </svg>
@@ -67,12 +67,12 @@
                         </span>
                     </div>
 
-                    <!-- <div class="progress">Questão  de 10</div> -->
+                    <!-- <div class="progress">Questï¿½o  de 10</div> -->
                 </div>
 
 
 
-                <div class="question-card"> <!-- div das questões -->
+                <div class="question-card"> <!-- div das questï¿½es -->
 
                     <div id="question-card"></div>
                     <span class="botoes"></span>
@@ -82,7 +82,7 @@
 
 
                     <div class="stats-card" >
-                        <h3>Estatísticas</h3>
+                        <h3>EstatÃ­sticas</h3>
                         <div class="stat-item">
                             <span>Progresso</span>
                             <div class="stat-bar">
@@ -101,11 +101,11 @@
                     </div>
 
                     <div class="info-card">
-                        <h3>Informações</h3>
+                        <h3>InformaÃ§Ãµes</h3>
                         <ul>
                             <li>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>
-                                <span id="qntdQuestoes-span">10 questões</span>
+                                <span id="qntdQuestoes-span">10 questï¿½es</span>
                             </li>
                             <li>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M12 6v6l4 2"/></svg>
@@ -139,7 +139,7 @@
             window.addEventListener("load", () => {
                 const spinner = document.getElementById("loadingSpinner");
 
-                // Garante que o layout já foi pintado antes de remover
+                // Garante que o layout jï¿½ foi pintado antes de remover
                 requestAnimationFrame(() => {
                     requestAnimationFrame(() => {
                         if (spinner) {
