@@ -2,6 +2,8 @@
 let isMenuOpen = false;
 let materia = localStorage.getItem("materia");
 let isPremium = false;
+let isLoggedIn = false;
+
 
 import {getUserState, toggleLoginState} from './userState.js';
 
@@ -87,6 +89,7 @@ async function updateMenuContent(usuario) {
     const isStatisticsPage = currentPath.includes('criarSimulado') || currentPath.includes('estatisticas') || currentPath.includes('revisao');
 
     isPremium = usuario.isPremium;
+    isLoggedIn = usuario.isLoggedIn
     console.log("usuario menu2:", usuario);
     console.log("Tipo de usuário:", typeof usuario);
     console.log("Campos:", usuario?.nome, usuario?.id, usuario?.isLoggedIn);
@@ -143,12 +146,9 @@ async function updateMenuContent(usuario) {
 
           <li><a href="reiniciarSimulado" class="menu-item" data-action="reiniciarSimulado"><i class="fas fa-rotate-right icon"></i> Reiniciar simulado</a></li>
           ${isSimuladoPage ? `<li><a href="#stats" class="menu-item" data-action="finalizarSimulado"><i class="fas fa-chart-bar icon"></i>Encerrar e ver desempenho</a></li>` : ''}
-          <li><a href="${contextPath}/index.jsp" class="menu-item" data-action="home"><i class="fas fa-house icon"></i> Voltar ao início</a></li>
-          <li><a href="#theme" data-action="toggleTheme" class="menu-item"><i class="fas fa-circle-half-stroke icon"></i> Alterar tema</a></li>
-
         ` : `
           <li><a href="${contextPath}/index.jsp" class="menu-item" data-action="home"><i class="fas fa-house icon"></i> Voltar ao início</a></li>
-          <li><a href="#theme" data-action="toggleTheme" class="menu-item"><i class="fas fa-circle-half-stroke icon"></i> Alterar tema</a></li>
+          
         `}
       </ul>
     </div>
@@ -158,6 +158,10 @@ async function updateMenuContent(usuario) {
       <div class="menu-section general-section"> 
         <div class="section-title">Geral</div>
         <ul class="menu-list">
+        ${isSimuladoPage ? `
+          <li><a href="${contextPath}/index.jsp" class="menu-item" data-action="home"><i class="fas fa-house icon"></i> Voltar ao início</a></li> 
+          <li><a href="#theme" data-action="toggleTheme" class="menu-item"><i class="fas fa-circle-half-stroke icon"></i> Alterar tema</a></li>
+    ` : ''}
           <li><a href="#logout" class="menu-item" data-action="criarSimulado"><i class="fa-solid fa-pen-to-square icon"></i> Criar Simulado</a></li>  
           <li><a href="#logout" class="menu-item"><i class="fa-solid fa-user-group icon"></i> Quiz Multiplayer</a></li>
           <li><a href="adminReview" class="menu-item" data-action="irAdminReview"><i class="fa-solid fa-user-group icon"></i> Admin Review</a></li>
@@ -583,12 +587,26 @@ function handleMenuItemClick(e) {
             irReiniciarSimulado();
             break;
         case 'fazerRevisao':
-            isPremium
-                ? window.location.href = contextPath + "/revisao"
-                : goPremium();
+            if (isLoggedIn) {
+                if (isPremium) {
+                    window.location.href = contextPath + "/revisao";
+                } else {
+                    goPremium();
+                }
+            } else {
+                criarFormularioLogin();
+            }
             break;
         case 'irEstatisticas':
-            window.location.href = contextPath + "/estatisticas";
+            if (isLoggedIn) {
+                if (isPremium) {
+                    window.location.href = contextPath + "/estatisticas";
+                } else {
+                    goPremium();
+                }
+            } else {
+                criarFormularioLogin();
+            }
             break;
         case 'toggleTheme':
             toggleTheme(); // <- sua função customizada
@@ -614,7 +632,7 @@ function handleMenuItemClick(e) {
 
 function toggleTheme() {
     console.log("Clique detectado");
-    const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+    const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
     const newTheme = currentTheme === 'light' ? 'dark' : 'light';
     document.documentElement.setAttribute('data-theme', newTheme);
     localStorage.setItem('theme', newTheme);
@@ -623,7 +641,7 @@ function toggleTheme() {
 
 
 // Inicializa com o tema salvo
-const savedTheme = localStorage.getItem("theme") || "light";
+const savedTheme = localStorage.getItem("theme") || "dark";
 document.documentElement.setAttribute("data-theme", savedTheme);
 // setSVGIcon(savedTheme === "dark");
 
