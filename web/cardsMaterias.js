@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", function () {
             break;
         
         case 'criarSimulado':
-            window.location.href = contextPath + "/criarSimulado/criarSimulado.jsp"; // <- sua função customizada
+            window.location.href = contextPath + "/criarSimulado/simuladoLivre.jsp"; // <- sua função customizada
             break;
        
         default:

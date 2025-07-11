@@ -3,7 +3,7 @@ let isMenuOpen = false;
 let materia = localStorage.getItem("materia");
 let isPremium = false;
 
-import { getUserState, toggleLoginState } from './userState.js';
+import {getUserState, toggleLoginState} from './userState.js';
 
 
 // Function to create and inject the menu HTML
@@ -102,10 +102,10 @@ async function updateMenuContent(usuario) {
   <div class="avatar-container">
     <div class="avatar">
       ${usuario.isLoggedIn && usuario.foto
-            ? `<img src="${usuario.foto}" alt="Avatar" class="avatar-img">`
-            : (usuario.isLoggedIn && usuario.iniciais
-                    ? usuario.iniciais
-                    : '?')}
+        ? `<img src="${usuario.foto}" alt="Avatar" class="avatar-img">`
+        : (usuario.isLoggedIn && usuario.iniciais
+            ? usuario.iniciais
+            : '?')}
     </div>
   </div>
 
@@ -113,14 +113,14 @@ async function updateMenuContent(usuario) {
     <div class="user-name">Olá, ${usuario.isLoggedIn ? usuario.nome : 'Visitante'}</div>
 
     ${
-            usuario.isLoggedIn
+        usuario.isLoggedIn
             ? (
-                    usuario.isPremium
+                usuario.isPremium
                     ? `<button class="menu-btn premium-btn shine-btn" disabled>Premium Ativo</button>`
                     : `<button class="menu-btn premium-btn shine-btn">Obter Premium</button>`
-                    )
+            )
             : `<button class="menu-btn login-btn login-btntest">Fazer Login</button>`
-            }
+    }
   </div>
 </div>
 </div>
@@ -139,7 +139,7 @@ async function updateMenuContent(usuario) {
           ${isStatisticsPage ? `<li><a href="#theme" data-action="toggleTheme" class="menu-item"><i class="fas fa-circle-half-stroke icon"></i> Alterar tema</a></li>` : ''}
 
         `
-            : isSimuladoPage || isResultadoPage ? ` <!-- SEÇÃO PÁGINA INICIAL SIMULADO -->
+        : isSimuladoPage || isResultadoPage ? ` <!-- SEÇÃO PÁGINA INICIAL SIMULADO -->
 
           <li><a href="reiniciarSimulado" class="menu-item" data-action="reiniciarSimulado"><i class="fas fa-rotate-right icon"></i> Reiniciar simulado</a></li>
           ${isSimuladoPage ? `<li><a href="#stats" class="menu-item" data-action="finalizarSimulado"><i class="fas fa-chart-bar icon"></i>Encerrar e ver desempenho</a></li>` : ''}
@@ -190,15 +190,15 @@ async function updateMenuContent(usuario) {
                 fetch("CriarSessaoCheckout", {
                     method: "POST"
                 })
-                        .then(response => response.text())
-                        .then(url => {
-                            if (url.startsWith("http")) {
-                                window.location.href = url;
-                            } else {
-                                console.error("URL inválida:", url);
-                            }
-                        })
-                        .catch(err => console.error("Erro:", err));
+                    .then(response => response.text())
+                    .then(url => {
+                        if (url.startsWith("http")) {
+                            window.location.href = url;
+                        } else {
+                            console.error("URL inválida:", url);
+                        }
+                    })
+                    .catch(err => console.error("Erro:", err));
             } else {
                 criarFormularioLogin();
             }
@@ -214,15 +214,15 @@ async function updateMenuContent(usuario) {
                 fetch("CriarSessaoCheckout", {
                     method: "POST"
                 })
-                        .then(response => response.text())
-                        .then(url => {
-                            if (url.startsWith("http")) {
-                                window.location.href = url;
-                            } else {
-                                console.error("URL inválida:", url);
-                            }
-                        })
-                        .catch(err => console.error("Erro:", err));
+                    .then(response => response.text())
+                    .then(url => {
+                        if (url.startsWith("http")) {
+                            window.location.href = url;
+                        } else {
+                            console.error("URL inválida:", url);
+                        }
+                    })
+                    .catch(err => console.error("Erro:", err));
             } else {
                 //window.location.href = contextPath + "/autenticacao/login.jsp";
             }
@@ -233,12 +233,12 @@ async function updateMenuContent(usuario) {
 
 function criarFormularioLogin() {
     fetch(contextPath + "/autenticacao/loginFormFragment.jsp")
-            .then(res => res.text())
-            .then(html => {
-                Swal.fire({
-                    title: 'Faça Login para continuar',
-                    theme: 'dark',
-                    html: `
+        .then(res => res.text())
+        .then(html => {
+            Swal.fire({
+                title: 'Faça Login para continuar',
+                theme: 'dark',
+                html: `
           <form id="login-form" method="POST" action="${contextPath}/login">
             <div id="feedback" class="feedback"></div>
             ${html}
@@ -253,69 +253,66 @@ function criarFormularioLogin() {
             </p>
           </form>
         `,
-                    customClass: {
-                        title: 'my-sw-title',
-                        popup: 'my-swal',
-                        // confirmButton: 'my-sw-confirm',
-                        // cancelButton: 'my-sw-cancel',
-                        htmlContainer: 'my-sw-text'
-                    },
-                    // opcionalmente, controle animações de show/hide se precisar de classes especiais:
-                    showClass: {
-                        popup: 'animate__animated animate__fadeUp' // já tem nossa animação via CSS
-                    },
-                    hideClass: {
-                        popup: 'animate__animated animate__fadeOut' // ou use outra animação
-                    },
-                    showConfirmButton: false,
-                    showCloseButton: true,
-                    width: 420,
-                    didOpen: () => {
-                        setupForm('login');
-                        setupAutenticacaoListeners();
-                        // Agora sim: só renderiza o botão depois que o DOM foi montado
-                        const googleBtn = document.getElementById('google-signin-button');
-                        if (window.google && googleBtn) {
-                            google.accounts.id.initialize({
-                                auto_select: true,
-                                client_id: "38814715322-327dbngal89ptbne74bqmfnc8e2e2qtc.apps.googleusercontent.com",
-                                callback: window.handleCredentialResponse,
-                                ux_mode: 'popup'
-                            });
-                            google.accounts.id.renderButton(
-                                    document.getElementById('google-signin-button'),
-                                    {
-                                        theme: 'outline',
-                                        size: 'large',
-                                        shape: 'square',
-                                        logo_alignment: 'left',
-                                        width: "350"
-                                    }
-                            );
-                        }
-
+                customClass: {
+                    title: 'my-sw-title',
+                    popup: 'my-swal',
+                    // confirmButton: 'my-sw-confirm',
+                    // cancelButton: 'my-sw-cancel',
+                    htmlContainer: 'my-sw-text'
+                },
+                // opcionalmente, controle animações de show/hide se precisar de classes especiais:
+                showClass: {
+                    popup: 'animate__animated animate__fadeUp' // já tem nossa animação via CSS
+                },
+                hideClass: {
+                    popup: 'animate__animated animate__fadeOut' // ou use outra animação
+                },
+                showConfirmButton: false,
+                showCloseButton: true,
+                width: 420,
+                didOpen: () => {
+                    setupForm('login');
+                    setupAutenticacaoListeners();
+                    // Agora sim: só renderiza o botão depois que o DOM foi montado
+                    const googleBtn = document.getElementById('google-signin-button');
+                    if (window.google && googleBtn) {
+                        google.accounts.id.initialize({
+                            auto_select: true,
+                            client_id: "38814715322-327dbngal89ptbne74bqmfnc8e2e2qtc.apps.googleusercontent.com",
+                            callback: window.handleCredentialResponse,
+                            ux_mode: 'popup'
+                        });
+                        google.accounts.id.renderButton(
+                            document.getElementById('google-signin-button'),
+                            {
+                                theme: 'outline',
+                                size: 'large',
+                                shape: 'square',
+                                logo_alignment: 'left',
+                                width: "350"
+                            }
+                        );
                     }
-                });
+
+                }
             });
+        });
 }
-
-
-
 
 
 function criarSessaoCheckout() {
     fetch("CriarSessaoCheckout", {
         method: "POST"
     })
-            .then(response => response.text())
-            .then(url => {
-                if (url.startsWith("http")) {
-                    window.location.href = url;
-                } else {
-                    console.error("URL inválida:", url);
-                }
-            })
-            .catch(err => console.error("Erro:", err));
+        .then(response => response.text())
+        .then(url => {
+            if (url.startsWith("http")) {
+                window.location.href = url;
+            } else {
+                console.error("URL inválida:", url);
+            }
+        })
+        .catch(err => console.error("Erro:", err));
 }
 
 function irRevisao() {
@@ -333,7 +330,7 @@ function irRetomarSimulado() {
         Swal.fire({
             title: 'Retomar último simulado?',
             html: 'Matéria: <strong>' + materiaFront + '</strong><br>' +
-                    'Questões: <strong>' + qQntd + '</strong>',
+                'Questões: <strong>' + qQntd + '</strong>',
             icon: 'question',
             theme: 'dark',
             showCancelButton: true,
@@ -398,58 +395,58 @@ function irReiniciarSimulado() {
 }
 
 function irAdminReview() {
-        Swal.fire({
-            title: '🔍 Analisar Questões',
-            input: 'number',
-            theme: 'dark',
-            inputLabel: 'Insira o ID inicial da questão:',
-            inputPlaceholder: 'Ex: 30',
-            confirmButtonText: 'Analisar Questões',
-            showCancelButton: true,
-            cancelButtonText: 'Cancelar',
-            inputValidator: (value) => {
-                if (!value || isNaN(value) || value <= 0) {
-                    return 'Digite um ID válido (número maior que zero)';
-                }
+    Swal.fire({
+        title: '🔍 Analisar Questões',
+        input: 'number',
+        theme: 'dark',
+        inputLabel: 'Insira o ID inicial da questão:',
+        inputPlaceholder: 'Ex: 30',
+        confirmButtonText: 'Analisar Questões',
+        showCancelButton: true,
+        cancelButtonText: 'Cancelar',
+        inputValidator: (value) => {
+            if (!value || isNaN(value) || value <= 0) {
+                return 'Digite um ID válido (número maior que zero)';
             }
-        }).then((result) => {
-            if (result.isConfirmed) {
-                const idInicial = parseInt(result.value);
-                iniciarSimuladoAdmin(idInicial);
-            }
-        });
-    }
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+            const idInicial = parseInt(result.value);
+            iniciarSimuladoAdmin(idInicial);
+        }
+    });
+}
 
 function iniciarSimuladoAdmin(idInicio) {
-  resetarEstatisticas();
+    resetarEstatisticas();
 
-  fetch(`${contextPath}/getQuestoesPorIdInicial`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded"
-    },
-    body: `idInicio=${encodeURIComponent(idInicio)}`
-  })
-  .then(res => res.json())
-  .then(ids => {
-    if (!ids || ids.length === 0) {
-      alert("Nenhuma questão encontrada a partir do ID informado.");
-      return;
-    }
+    fetch(`${contextPath}/getQuestoesPorIdInicial`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: `idInicio=${encodeURIComponent(idInicio)}`
+    })
+        .then(res => res.json())
+        .then(ids => {
+            if (!ids || ids.length === 0) {
+                alert("Nenhuma questão encontrada a partir do ID informado.");
+                return;
+            }
 
-    const idsParam = ids.join(",");
+            const idsParam = ids.join(",");
 
-    localStorage.setItem("idsQuestoes", idsParam);
-    localStorage.setItem("qQntd", ids.length);
-    localStorage.setItem("materia", "admin");
-    localStorage.setItem("anoSimulado", "admin");
+            localStorage.setItem("idsQuestoes", idsParam);
+            localStorage.setItem("qQntd", ids.length);
+            localStorage.setItem("materia", "admin");
+            localStorage.setItem("anoSimulado", "admin");
 
-    window.location.href = `${contextPath}/iniciarSimulado?materia=admin&ids=${idsParam}&indice=0`;
-  })
-  .catch(err => {
-    console.error("Erro ao buscar IDs por ID inicial:", err);
-    alert("Erro ao iniciar simulado (modo admin).");
-  });
+            window.location.href = `${contextPath}/iniciarSimulado?materia=admin&ids=${idsParam}&indice=0`;
+        })
+        .catch(err => {
+            console.error("Erro ao buscar IDs por ID inicial:", err);
+            alert("Erro ao iniciar simulado (modo admin).");
+        });
 }
 
 
@@ -587,8 +584,8 @@ function handleMenuItemClick(e) {
             break;
         case 'fazerRevisao':
             isPremium
-                    ? window.location.href = contextPath + "/revisao"
-                    : goPremium();
+                ? window.location.href = contextPath + "/revisao"
+                : goPremium();
             break;
         case 'irEstatisticas':
             window.location.href = contextPath + "/estatisticas";
