@@ -11,9 +11,16 @@
     --google-button-text: #1f2937;
 }
 
+.google-button-wrapper {
+    height: 45px;
+    max-width: 350px;
+    margin: 20px auto;
+
+}
+
 #login-form #google-signin-button {
     max-width: 420px; /* Mantém o container com largura total se desejado, ou pode ser auto */
-    display: flex; /* Usa flexbox para alinhar o conteúdo */
+    display: block; /* Usa flexbox para alinhar o conteúdo */
     justify-content: center; /* Centraliza o botão do Google horizontalmente */
     align-items: center; /* Centraliza verticalmente se houver altura definida */
     margin-top: 10px;
@@ -22,22 +29,11 @@
     font-size: 14px;
 }
 
-#login-form #google-signin-button {
-    width: 100%; /* Garante que o div ocupa a largura do seu container */
-    display: block; /* Garante que ele se comporta como um bloco e respeita a largura */
-    /* Remova margin-top e margin-bottom daqui, pois já adicionei no seletor acima para o #google-signin-button */
-}
 
-/* Se você tem um wrapper externo, garanta que ele também esteja ok */
-.google-button-wrapper { /* Se você decidir manter este wrapper externo */
-    width: 100%;
-    display: flex;
-    justify-content: center; /* Centraliza o botão se ele não for 100% do wrapper */
-}
+
 
 .google-div {
     overflow: hidden;
-
 }
 
 /* Inputs */

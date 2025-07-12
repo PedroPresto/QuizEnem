@@ -272,7 +272,9 @@ function criarFormularioLogin() {
                     setupAutenticacaoListeners();
                     // Agora sim: só renderiza o botão depois que o DOM foi montado
                     const googleBtn = document.getElementById('google-signin-button');
+                    const googleButtonContainer = document.getElementById('google-signin-button');
 
+                    const containerWidth = googleButtonContainer.offsetWidth;
                     if (window.google && googleBtn) {
                         google.accounts.id.initialize({
                             auto_select: true,
@@ -288,7 +290,7 @@ function criarFormularioLogin() {
                                 shape: 'square',
                                 text: 'Entrar com Google',
                                 logo_alignment: 'left',
-                                width: "350"
+                                width: containerWidth.toString()
                             }
                         );
                     }
@@ -324,6 +326,9 @@ function irRevisao() {
 
 function irRetomarSimulado() {
     let materia = localStorage.getItem("materia");
+
+    if materia == null : materia = "Simulado Personalizado";
+
     let qQntd = localStorage.getItem("qQntd");
     if (materia && qQntd) {
         Swal.fire({

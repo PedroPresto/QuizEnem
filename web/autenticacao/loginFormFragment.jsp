@@ -1,8 +1,11 @@
 <!-- loginFormFragment.jsp -->
 
-<div class="google-div">
-<div id="google-signin-button" class="google-button-wrapper"></div>
+<div class="google-button-wrapper">
+
+    <div id="google-signin-button"></div>
+
 </div>
+
 
 <div class="divider">
     <span>ou</span>
