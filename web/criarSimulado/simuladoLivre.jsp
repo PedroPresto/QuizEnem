@@ -61,5 +61,12 @@
 <script src="${pageContext.request.contextPath}/criarSimulado/js/summary.js"></script>
 <script src="${pageContext.request.contextPath}/criarSimulado/js/simuladoLivre.js"></script>
 
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+// Adiciona a classe 'fade-in' assim que a página estiver pronta
+        document.body.classList.add('fade-in');
+    });
+</script>
+
 </body>
 </html>

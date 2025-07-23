@@ -77,6 +77,13 @@
         </div>
     </div>
 
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+// Adiciona a classe 'fade-in' assim que a página estiver pronta
+                document.body.classList.add('fade-in');
+            });
+        </script>
+
     <script src="js/store.js"></script>
         <script>
             // Configura o tipo de simulado para a página criarSimulado.jsp
@@ -89,6 +96,8 @@
     <script src="js/subjectCounter.js"></script>
     <script src="js/summary.js"></script>
     <script src="js/main.js"></script>
+
+
 
 </body>
 </html>

@@ -59,6 +59,22 @@
     box-sizing: border-box;
 }
 
+body.fade-in {
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+}
+
+/* Classe aplicada ao <body> para iniciar a animação de saída */
+body.fade-out {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+/* Estado inicial (e invisível) da página antes da animação de entrada */
+body {
+    opacity: 0;
+}
+
 body {
     touch-action: manipulation;
     font-family: var(--font-family);

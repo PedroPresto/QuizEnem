@@ -158,7 +158,7 @@ async function updateMenuContent(usuario) {
       <div class="menu-section general-section"> 
         <div class="section-title">Geral</div>
         <ul class="menu-list">
-        ${isSimuladoPage ? `
+        ${isSimuladoPage || isResultadoPage ? `
           <li><a href="${contextPath}/index.jsp" class="menu-item" data-action="home"><i class="fas fa-house icon"></i> Voltar ao início</a></li> 
           <li><a href="#theme" data-action="toggleTheme" class="menu-item"><i class="fas fa-circle-half-stroke icon"></i> Alterar tema</a></li>
     ` : ''}
@@ -327,7 +327,7 @@ function irRevisao() {
 function irRetomarSimulado() {
     let materia = localStorage.getItem("materia");
 
-    if materia == null : materia = "Simulado Personalizado";
+    if (materia == null) { materia = "Simulado Personalizado"; }
 
     let qQntd = localStorage.getItem("qQntd");
     if (materia && qQntd) {

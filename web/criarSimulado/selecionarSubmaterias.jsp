@@ -74,7 +74,12 @@
 <script src="${pageContext.request.contextPath}/criarSimulado/js/summary.js"></script>
 <script src="js/selecionarSubmaterias.js"></script>
 
-<%-- NOVO: Script específico para inicializar a lógica da página de sub-matérias --%>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+// Adiciona a classe 'fade-in' assim que a página estiver pronta
+document.body.classList.add('fade-in');
+});
+</script>
 
 </body>
 </html>
