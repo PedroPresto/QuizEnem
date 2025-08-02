@@ -8,12 +8,10 @@
     <%
         String anexoTexto = (String) session.getAttribute("anexoTexto");
         String anexoImagem = (String) session.getAttribute("anexoImagem");
-        boolean modoAdmin = "admin".equals(request.getParameter("materia"));
-
-        // Só exibe o "menu sanfona" se houver imagem OU texto
         if ((anexoImagem != null && !anexoImagem.trim().isEmpty()) || (anexoTexto != null && !anexoTexto.trim().isEmpty())) {
     %>
-    <div class="anexo-wrapper <%= modoAdmin ? "expanded" : "" %>" onclick="toggleAnexo(this)">
+
+    <div class="anexo-wrapper" onclick="toggleAnexo(this)">
         <div class="anexo-header">
             <span>Texto de Apoio</span>
             <svg class="anexo-icon" xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -21,10 +19,8 @@
                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6" />
             </svg>
         </div>
-        <div class="anexo-body"
-                <%= modoAdmin ? "style='max-height:500px; padding:8px 16px 16px;'" : "" %>>
+        <div class="anexo-body">
 
-            <%-- 1. Exibe a IMAGEM primeiro, se ela existir --%>
             <% if (anexoImagem != null && !anexoImagem.trim().isEmpty()) { %>
             <img src="<%= request.getContextPath() %>/questoes-img/<%= anexoImagem %>"
                  alt="Imagem de apoio da questão"
@@ -97,11 +93,9 @@
 
 <%
     String comentarioQuestao = (String) session.getAttribute("comentarioQuestao");
-    modoAdmin = "admin".equals(request.getParameter("materia")); // já detecta o modo
     if (comentarioQuestao != null && !comentarioQuestao.trim().isEmpty()) {
 %>
-<div class="anexo-wrapper <%= modoAdmin ? "expanded" : "" %>"
-        <%= modoAdmin ? "" : "onclick=\"toggleAnexo(this)\"" %>>
+<div class="anexo-wrapper" onclick="toggleAnexo(this)">
     <div class="anexo-header">
         <span>Comentário da questão</span>
         <svg class="anexo-icon" xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -109,8 +103,7 @@
             <path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6" />
         </svg>
     </div>
-    <div class="anexo-body"
-            <%= modoAdmin ? "style='max-height:500px; padding:8px 16px 16px;'" : "" %>>
+    <div class="anexo-body">
         <%-- Formatação de negrito, itálico e quebra de linha aplicada aqui também --%>
         <%= comentarioQuestao.replaceAll("\\*\\*(.*?)\\*\\*", "<b>$1</b>").replaceAll("_(.*?)_", "<i>$1</i>").replaceAll("\n", "<br/>") %>
     </div>

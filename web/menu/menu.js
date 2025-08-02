@@ -2,8 +2,8 @@
 let isMenuOpen = false;
 let materia = localStorage.getItem("materia");
 let isPremium = false;
-let isLoggedIn = false;
-
+var isLoggedIn = false;
+let isAdmin = false;
 
 import {getUserState, toggleLoginState} from './userState.js';
 
@@ -90,6 +90,8 @@ async function updateMenuContent(usuario) {
 
     isPremium = usuario.isPremium;
     isLoggedIn = usuario.isLoggedIn
+    isAdmin = usuario.isAdmin;
+
     console.log("usuario menu2:", usuario);
     console.log("Tipo de usuário:", typeof usuario);
     console.log("Campos:", usuario?.nome, usuario?.id, usuario?.isLoggedIn);
@@ -164,7 +166,7 @@ async function updateMenuContent(usuario) {
     ` : ''}
           <li><a href="#logout" class="menu-item" data-action="criarSimulado"><i class="fa-solid fa-pen-to-square icon"></i> Criar Simulado</a></li>  
           <li><a href="#logout" class="menu-item"><i class="fa-solid fa-user-group icon"></i> Quiz Multiplayer</a></li>
-          <li><a href="adminReview" class="menu-item" data-action="irAdminReview"><i class="fa-solid fa-user-group icon"></i> Admin Review</a></li>
+         ${usuario.isAdmin ? ` <li><a href="adminReview" class="menu-item" data-action="irAdminReview"><i class="fa-solid fa-user-group icon"></i> Admin Review</a></li> ` : '' }
         </ul>
       </div>
     ` : ''}
@@ -235,7 +237,7 @@ async function updateMenuContent(usuario) {
     }
 }
 
-function criarFormularioLogin() {
+export function criarFormularioLogin() {
     fetch(contextPath + "/autenticacao/loginFormFragment.jsp")
         .then(res => res.text())
         .then(html => {
