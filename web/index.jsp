@@ -35,39 +35,37 @@
             <main class="home-container">
                 <section class="featured-exams">
                     <h2>Simulados Enem</h2>
+
                     <div class="exam-cards">
-                        <div class="exam-card">
-                            <div class="exam-card-header">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
-                                <h3>Edições passadas do Enem</h3>
+                        <div class="exam-card" id="cardProvasAnteriores">
+                            <div class="exam-card-content">
+                                <div class="exam-card-header">
+                                    <h3>Edições passadas do Enem</h3>
+                                </div>
+                                <p>Resolva questões oficiais do Enem com comentários explicativos.</p>
+                                <div class="exam-stats">
+                                    <span>11.3k estudantes</span>
+                                    <span>4320 questões</span>
+                                </div>
+                                <button class="btn btn-primary" id="provasAnteriores" type="button">Começar agora</button>
                             </div>
-                            <p>Resolva questões oficiais do Enem com comentários explicativos.</p>
-                            <div class="exam-stats">
-                                <span>11.3k estudantes</span>
-                                <span>4320 questões</span>
-                            </div>
-                            <button class="btn btn-primary" id="provasAnteriores" type="button">Começar agora</button>
-
                         </div>
 
-                        <div class="exam-card">
-                            <div class="exam-card-header">
-                                <svg xmlns="http://www.w3.org/2000/svg"
-                                     width="24" height="24"
-                                     viewBox="0 0 576 512"
-                                     fill="currentColor">
-                                    <path d="M471.6 21.7c-21.9-21.9-57.3-21.9-79.2 0L362.3 51.7l97.9 97.9 30.1-30.1c21.9-21.9 21.9-57.3 0-79.2L471.6 21.7zm-299.2 220c-6.1 6.1-10.8 13.6-13.5 21.9l-29.6 88.8c-2.9 8.6-.6 18.1 5.8 24.6s15.9 8.7 24.6 5.8l88.8-29.6c8.2-2.7 15.7-7.4 21.9-13.5L437.7 172.3 339.7 74.3 172.4 241.7zM96 64C43 64 0 107 0 160L0 416c0 53 43 96 96 96l256 0c53 0 96-43 96-96l0-96c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 96c0 17.7-14.3 32-32 32L96 448c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l96 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 64z"/></svg>
-                                <h3>Monte sua prova do seu jeito</h3>
+                        <div class="exam-card" id="cardCriarSimulado">
+                            <div class="exam-card-content">
+                                <div class="exam-card-header">
+                                    <h3>Monte sua prova do seu jeito</h3>
+                                </div>
+                                <p>Questões exclusivas com comentários feitos por especialistas</p>
+                                <div class="exam-stats">
+                                    <span>12.1k estudantes</span>
+                                    <span>5469 questões</span>
+                                </div>
+                                <button class="btn btn-primary" id="dev-card" type="button">Começar Agora</button>
                             </div>
-                            <p>Questões exclusivas com comentários feitos por especialistas</p>
-                            <div class="exam-stats">
-                                <span>12.1k estudantes</span>
-                                <span>5469 questões</span>
-                            </div>
-                            <button class="btn btn-primary" id="dev-card" type="button">Começar Agora</button>
                         </div>
-
                     </div>
+
                 </section>
 
                 <section class="subjects-grid">
@@ -98,17 +96,7 @@
                             <span>224 questões</span>
                         </div>
 
-                        <div class="subject-card" id="cardFilosofia">
-                            <i class="fa-solid fa-landmark"></i>
-                            <h3>Filosofia</h3>
-                            <span>224 questões</span>
-                        </div>
 
-                        <div class="subject-card" id="cardSociologia">
-                            <i class="fa-solid fa-users-viewfinder"></i>
-                            <h3>Sociologia</h3>
-                            <span>224 questões</span>
-                        </div>
 
                         <div class="subject-card" id="cardFisica">
                             <i class="fa-solid fa-apple-whole"></i>
@@ -128,6 +116,18 @@
                             <span>156 questões</span>
                         </div>
 
+                        <div class="subject-card" id="cardFilosofia">
+                            <i class="fa-solid fa-landmark"></i>
+                            <h3>Filosofia</h3>
+                            <span>224 questões</span>
+                        </div>
+
+                        <div class="subject-card" id="cardSociologia">
+                            <i class="fa-solid fa-users-viewfinder"></i>
+                            <h3>Sociologia</h3>
+                            <span>224 questões</span>
+                        </div>
+
                         <div class="subject-card" id="cardIngles">
                             <i class="fa-solid fa-flag-usa"></i>
                             <h3>Inglês</h3>
@@ -139,6 +139,31 @@
                             <h3>Espanhol</h3>
                             <span>75 questões</span>
                         </div>
+
+                        <div class="subject-card" id="cardLiteratura">
+                            <i class="fa-solid fa-quote-left"></i>
+                            <h3>Literatura</h3>
+                            <span>75 questões</span>
+                        </div>
+
+                        <div class="subject-card" id="cardArtes">
+                            <i class="fa-solid fa-signature"></i>
+                            <h3>Artes</h3>
+                            <span>75 questões</span>
+                        </div>
+
+                        <div class="subject-card" id="cardTI">
+                            <i class="fa-solid fa-computer"></i>
+                            <h3>T.I</h3>
+                            <span>75 questões</span>
+                        </div>
+
+                        <div class="subject-card" id="cardEF">
+                            <i class="fa-solid fa-dumbbell"></i>
+                            <h3>Ed. Física</h3>
+                            <span>75 questões</span>
+                        </div>
+
                     </div>
                 </section>
 
@@ -162,7 +187,7 @@
 
                         <div class="action-card">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-                            <h3>Desafie-se com Questões Surpresa</h3>
+                            <h3>Explore questões aleatórias</h3>
                             <p>Treine com perguntas variadas e descubra como se sairia na prova do Enem.</p>
                             <button class="btn btn-outline">Começar Desafio</button>
                         </div>
@@ -173,7 +198,7 @@
 
 
         <script src="script.js"></script>
-        <script src="cardsMaterias.js"></script>
+        <script type="module" src="cardsMaterias.js"></script>
         <script src="SalvarQuestoesBD.js"></script>
 
         <div id="loadingSpinner" class="spinner-overlay" style="display: none;">

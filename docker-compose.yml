@@ -1,0 +1,50 @@
+# Versão do Docker Compose que estamos usando
+version: '3.8'
+
+# Aqui definimos os 'serviços' ou containers que compõem nossa aplicação
+services:
+  # 1. O serviço para o banco de dados MySQL
+  db:
+    image: mysql:8.0
+    container_name: quiz-enem-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD} # Senha para o usuário root do banco
+      MYSQL_DATABASE: ${DB_DATABASE}           # Nome do banco de dados que será criado
+      MYSQL_USER: ${DB_USER}                   # Nome do usuário para a aplicação
+      MYSQL_PASSWORD: ${DB_PASSWORD}           # Senha para o usuário da aplicação
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ./db-init:/docker-entrypoint-initdb.d
+    networks:
+      - quiz-net
+
+  # 2. O serviço para a sua aplicação Java (Quiz Enem)
+  app:
+    # 'build: .' diz ao Docker para construir a imagem usando o Dockerfile na pasta atual
+    build: .
+    container_name: quiz-enem-app
+    restart: always
+    # Mapeia a porta 80 do seu VPS para a porta 8080 do container (onde o Tomcat roda)
+    ports:
+      - "80:8080"
+    environment:
+      # Variáveis de ambiente para a sua aplicação se conectar ao banco
+      DB_HOST: db # O nome do serviço do banco de dados!
+      DB_PORT: 3306
+      DB_NAME: ${DB_DATABASE}
+      DB_USER: ${DB_USER}
+      DB_PASS: ${DB_PASSWORD}
+    # 'depends_on' garante que o container do banco de dados seja iniciado antes da aplicação
+    depends_on:
+      - db
+    networks:
+      - quiz-net
+
+# Define os volumes para persistência de dados
+volumes:
+  mysql-data:
+
+# Define a rede para a comunicação entre os containers
+networks:
+  quiz-net:

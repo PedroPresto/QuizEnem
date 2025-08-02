@@ -409,8 +409,8 @@ function carregarQuestao(indice, materia) {
                 // Primeiro, injeta a nova questão no HTML
                 document.getElementById("question-card").innerHTML = data.html;
                 document.getElementById("nomeMateriaSpan").textContent = data.materia;
-                document.getElementById("idQuestao").textContent = data.idQuestao;
-                document.getElementById("numeroQuestao").textContent = data.numeroQuestao;
+               // document.getElementById("idQuestao").textContent = data.idQuestao;
+               // document.getElementById("numeroQuestao").textContent = data.numeroQuestao;
                 // Só agora, depois do backend ter atualizado a sessão, buscamos a resposta correta
                 return fetch('getOpcaoCorreta');
             })

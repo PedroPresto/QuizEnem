@@ -42,9 +42,10 @@
                             </svg>
                             <span id="questaoTexto">Quest�o 1 de <%= session.getAttribute("qQntd")%></span>
                         </span>
-                        
+
+                        <!--
                         <span class="tag" id="questaoAtualFront">
-                            <!-- �cone de checklist -->
+
                             <svg class="tag-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M9 5h11M9 12h11M9 19h11M4 5h.01M4 12h.01M4 19h.01" />
                             </svg>
@@ -52,12 +53,13 @@
                         </span>
                         
                         <span class="tag" id="questaoAtualFront">
-                            <!-- �cone de checklist -->
+
                             <svg class="tag-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M9 5h11M9 12h11M9 19h11M4 5h.01M4 12h.01M4 19h.01" />
                             </svg>
                             <span id="numeroQuestao">N: <%= session.getAttribute("numeroQuestao")%></span>
                         </span>
+                        -->
 
                         <span class="tag timer">
                             <svg class="tag-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="2">
