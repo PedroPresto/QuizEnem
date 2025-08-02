@@ -22,8 +22,7 @@ RUN rm -rf /usr/local/tomcat/webapps/*
 
 # Copia APENAS o ficheiro .war que foi gerado no Estágio 1
 # para a pasta de deploy do Tomcat
-COPY --from=builder /app/dist/Quiz-Enem.war /usr/local/tomcat/webapps/ROOT.war
-
+COPY --from=builder /app/dist/Quiz_Enem.war /usr/local/tomcat/webapps/ROOT.war
 # Expõe a porta 8080 e inicia o Tomcat
 EXPOSE 8080
 CMD ["catalina.sh", "run"]
