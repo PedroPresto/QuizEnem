@@ -1,0 +1,26 @@
+# Arquivo: .dockerignore
+
+# Ignorar o diretório do Git. Essencial para segurança e tamanho.
+.git
+.gitignore
+
+# Ignorar os diretórios de saída do build do Ant.
+# Isso garante que cada build dentro do Docker seja 100% limpo.
+build/
+dist/
+
+# Ignorar arquivos de ambiente com senhas. Nunca devem entrar na imagem.
+.env
+*.env
+
+# Ignorar arquivos e pastas de configuração de IDEs
+.idea/
+*.iml
+.vscode/
+
+# Ignorar logs locais
+*.log
+
+# Ignorar arquivos do sistema operacional
+.DS_Store
+Thumbs.db
