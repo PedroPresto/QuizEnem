@@ -8,7 +8,7 @@
     <body>
         <div class="container">
             <header class="header">
-                <h1>Estatísticas</h1>
+                <h1>EstatÃ­sticas</h1>
                 <p class="subtitle">Acompanhe seu desempenho</p>
             </header>
 
@@ -20,45 +20,18 @@
                 </div>
                 <div class="ranking-content">
                     <p class="ranking-label">Ranking Global</p>
-                    <p class="ranking-position">12º lugar entre 5.000 estudantes</p>
+                    <p class="ranking-position">14.423Âº lugar entre 15.933 estudantes</p>
                     <div class="progress-container">
                         <div class="progress-bar" style="width: 20.6%"></div>
                     </div>
-                    <p class="percentile">Top 45.3%</p>
+                    <p class="percentile">Top 2.3%</p>
                 </div>
             </div>
 
              <%@ include file="/estatisticas/desempenho.jsp"%>
 
-            <div class="stats-grid">
-                <h3>Estatísticas Detalhadas</h3>
-                <div class="grid">
-                    <div class="stat-item">
-                        <div class="stat-icon" style="background-color: #BFDBFE">
-                            <i class="fa-solid fa-award"></i>
-                        </div>
-                        <span class="stat-value">486</span>
-                        <span class="stat-label">Questões Respondidas</span>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-icon" style="background-color: #FACC15">
-                            ?
-                        </div>
-                        <span class="stat-value">27</span>
-                        <span class="stat-label">Simulados Completos</span>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-icon" style="background-color: #E879F9">
-                            ??
-                        </div>
-                        <span class="stat-value">32h 45m</span>
-                        <span class="stat-label">Tempo de Estudo</span>
-                    </div>
-                </div>
-            </div>
-
             <button class="view-quizzes-btn"  onclick="window.location.href = contextPath + '/revisao'">
-                Revisar Questões Respondidas
+                Revisar QuestÃµes Respondidas
             </button>
         </div>
 

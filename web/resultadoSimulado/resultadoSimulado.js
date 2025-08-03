@@ -59,14 +59,14 @@ function createChart(data) {
         data: {
             labels: ['Acertos', 'Erros', 'Não Respondidas'],
             datasets: [{
-                    data: [
-                        data.detalhado.correct || 0,
-                        data.detalhado.incorrect || 0,
-                        data.detalhado.unanswered || 0
-                    ],
-                    backgroundColor: ['#22c55e', '#ef4444', '#f59e0b'],
-                    borderWidth: 0
-                }]
+                data: [
+                    data.detalhado.correct || 0,
+                    data.detalhado.incorrect || 0,
+                    data.detalhado.unanswered || 0
+                ],
+                backgroundColor: ['#22c55e', '#ef4444', '#f59e0b'],
+                borderWidth: 0
+            }]
         },
         options: {
             responsive: true,
@@ -79,7 +79,8 @@ function createChart(data) {
                         font: {
                             size: 14
                         },
-                        color: getComputedStyle(document.documentElement).getPropertyValue('--text-color')
+                        // CORREÇÃO: A cor do texto do gráfico também precisa de respeitar o tema
+                        color: getComputedStyle(document.documentElement).getPropertyValue('--text-primary')
                     }
                 },
                 tooltip: {
@@ -105,26 +106,27 @@ function createChart(data) {
             }
         },
         plugins: [{
-                beforeDraw: function (chart) {
-                    const ctx = chart.ctx;
-                    ctx.save();
-                    ctx.font = '14px sans-serif';
-                    ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--text-color');
-                    ctx.textAlign = 'center';
-                    ctx.textBaseline = 'middle';
+            beforeDraw: function (chart) {
+                const ctx = chart.ctx;
+                ctx.save();
+                ctx.font = '14px sans-serif';
+                // CORREÇÃO: A cor do texto do gráfico também precisa de respeitar o tema
+                ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--text-primary');
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
 
-                    const data = chart.data.datasets[0].data;
-                    const total = data.reduce((a, b) => a + b, 0);
+                const data = chart.data.datasets[0].data;
+                const total = data.reduce((a, b) => a + b, 0);
 
-                    let centerX = chart.chartArea.left + (chart.chartArea.right - chart.chartArea.left) / 2;
-                    let centerY = chart.chartArea.top + (chart.chartArea.bottom - chart.chartArea.top) / 2;
+                let centerX = chart.chartArea.left + (chart.chartArea.right - chart.chartArea.left) / 2;
+                let centerY = chart.chartArea.top + (chart.chartArea.bottom - chart.chartArea.top) / 2;
 
-                    ctx.fillText(`Total`, centerX, centerY - 15);
-                    ctx.fillText(`${total}`, centerX, centerY + 15);
+                ctx.fillText(`Total`, centerX, centerY - 15);
+                ctx.fillText(`${total}`, centerX, centerY + 15);
 
-                    ctx.restore();
-                }
-            }]
+                ctx.restore();
+            }
+        }]
     });
 
     // 🛠 Força o redimensionamento após o carregamento
@@ -136,42 +138,30 @@ function createChart(data) {
     }, 300);
 }
 
-// Theme management
-function initTheme() {
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    document.documentElement.setAttribute('data-theme', savedTheme);
-    return savedTheme;
-}
-
-function toggleTheme() {
-    const currentTheme = document.documentElement.getAttribute('data-theme');
-    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-    document.documentElement.setAttribute('data-theme', newTheme);
-    localStorage.setItem('theme', newTheme);
-}
-
+// REMOÇÃO: A lógica de gestão de tema foi removida deste ficheiro
+// para evitar conflitos com o script principal em head.jsp.
 
 // Inicialização
 document.addEventListener('DOMContentLoaded', () => {
-    initTheme();
+    // A chamada a initTheme() foi removida daqui.
 
     fetch('finalizarSimulado')
-            .then(response => response.json())
-            .then(data => {
-                estatisticas = data;
-                updateResults(data);
-                createChart(data);
+        .then(response => response.json())
+        .then(data => {
+            estatisticas = data;
+            updateResults(data);
+            createChart(data);
 
-                // Oculta o loading após o carregamento dos dados
-                const spinner = document.getElementById("loadingSpinner");
-                if (spinner) {
-                    setTimeout(() => {
-                        spinner.style.display = "none";
-                    }, 600);
-                }
+            // Oculta o loading após o carregamento dos dados
+            const spinner = document.getElementById("loadingSpinner");
+            if (spinner) {
+                setTimeout(() => {
+                    spinner.style.display = "none";
+                }, 600);
+            }
 
-            })
-            .catch(err => {
-                console.error('Erro ao carregar os dados do simulado:', err);
-            });
+        })
+        .catch(err => {
+            console.error('Erro ao carregar os dados do simulado:', err);
+        });
 });
