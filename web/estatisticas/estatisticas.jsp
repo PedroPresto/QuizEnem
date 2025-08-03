@@ -1,6 +1,5 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-    <head>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<head>
         <title>Meu Progresso</title> 
         <link rel="stylesheet" href="${pageContext.request.contextPath}/estatisticas/estatisticas.css"> 
         <%@ include file="/includes/head.jsp"%>
