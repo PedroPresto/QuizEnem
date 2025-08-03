@@ -1,8 +1,8 @@
 # =================================================================
 # ESTÁGIO 1: O Construtor (Builder)
-# Usamos uma imagem oficial do Java 11 e instalamos o Ant nela.
+# Alterado para usar o JDK 17, que suporta a sintaxe moderna do seu código.
 # =================================================================
-FROM eclipse-temurin:11-jdk AS builder
+FROM eclipse-temurin:17-jdk AS builder
 
 # Atualiza os pacotes e instala o Ant
 RUN apt-get update && apt-get install -y ant
@@ -15,7 +15,7 @@ RUN ant dist
 
 # =================================================================
 # ESTÁGIO 2: O Executor (Runner)
-# Esta parte não muda.
+# Esta parte não precisa de ser alterada, o Tomcat 9 funciona bem com o .war gerado.
 # =================================================================
 FROM tomcat:9.0-jdk11-openjdk
 
