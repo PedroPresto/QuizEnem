@@ -5,9 +5,10 @@
 
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
-        <property name="url" value="jdbc:mysql://#{systemProperties['DB_HOST']}:3306/#{systemProperties['DB_NAME']}?useSSL=false&amp;allowPublicKeyRetrieval=true" />
-        <property name="username" value="#{systemProperties['DB_USER']}" />
-        <property name="password" value="#{systemProperties['DB_PASS']}" />
+
+        <property name="url" value="jdbc:mysql://#{systemEnvironment['DB_HOST']}:3306/#{systemEnvironment['DB_NAME']}?useSSL=false&amp;allowPublicKeyRetrieval=true" />
+        <property name="username" value="#{systemEnvironment['DB_USER']}" />
+        <property name="password" value="#{systemEnvironment['DB_PASS']}" />
     </bean>
 
 </beans>
