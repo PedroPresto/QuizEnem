@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.Usuario;
 
-@WebFilter(urlPatterns = {"/admins/*"})
+//@WebFilter(urlPatterns = {"/admins/*"})
 public class AdminOnlyFilter implements Filter {
 
     @Override
