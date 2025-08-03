@@ -24,3 +24,5 @@ dist/
 # Ignorar arquivos do sistema operacional
 .DS_Store
 Thumbs.db
+
+certbot/
