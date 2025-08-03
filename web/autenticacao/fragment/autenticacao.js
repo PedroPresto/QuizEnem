@@ -1,9 +1,5 @@
-// autenticacao.js
-
 let modoAtual = 'login'; // login ou cadastro
-
-// CORREÇÃO: Usando o nome da função correto (toggleLoginState) e o caminho corrigido para o servidor.
-import { getUserState, toggleLoginState } from '/menu/userState.js';
+import {getUserState, toggleLoginState} from '/menu/userState.js';
 
 // Configura o formulário para login ou cadastro
 function setupForm(modo) {
@@ -15,6 +11,7 @@ function setupForm(modo) {
     const botaoSubmit = document.getElementById('botaoSubmit');
     const alternarMensagem = document.getElementById('alternarMensagem');
 
+
     modoAtual = modo; // Atualiza o modo atual
 
     if (modo === 'login') {
@@ -22,13 +19,13 @@ function setupForm(modo) {
         campoConfirmarSenha.style.display = 'none';
         botaoSubmit.querySelector('.button-text').textContent = 'Entrar';
         formLogin.action = contextPath + '/login';
-        alternarMensagem.innerHTML = 'Ainda n\u00E3o tem conta? <a href="#" id="linkCadastro">Cadastre-se</a>';
+        alternarMensagem.innerHTML = 'Ainda não tem conta? <a href="#" id="linkCadastro">Cadastre-se</a>';
     } else if (modo === 'cadastro') {
         campoNome.style.display = 'block';
         campoConfirmarSenha.style.display = 'block';
         botaoSubmit.querySelector('.button-text').textContent = 'Criar minha conta';
         formLogin.action = contextPath + '/cadastro';
-        alternarMensagem.innerHTML = 'J\u00E1 tem uma conta? <a href="#" id="linkLogin">Entrar</a>';
+        alternarMensagem.innerHTML = 'Já tem uma conta? <a href="#" id="linkLogin">Entrar</a>';
     }
 
     // Atualiza os eventos dos novos links
@@ -58,7 +55,7 @@ function bindEvents() {
 // Exibe mensagens de erro ou sucesso
 function mostrarMensagem(tipo, texto) {
     const mensagem = document.getElementById('feedback');
-    const botaoSubmit = document.getElementById('botaoSubmit');
+    const formLogin = document.getElementById('botaoSubmit');
 
     mensagem.className = `feedback ${tipo}`;
     mensagem.innerText = texto;
@@ -67,11 +64,13 @@ function mostrarMensagem(tipo, texto) {
         mensagem.style.opacity = 1;
     }, 10);
     if (tipo === "error") {
-        botaoSubmit.classList.add('shake');
+        // Faz o formulário tremer
+        formLogin.classList.add('shake');
         setTimeout(() => {
-            botaoSubmit.classList.remove('shake');
+            formLogin.classList.remove('shake');
         }, 500);
 
+        // Some após alguns segundos
         setTimeout(() => {
             mensagem.style.opacity = 0;
             setTimeout(() => {
@@ -81,58 +80,70 @@ function mostrarMensagem(tipo, texto) {
     }
 }
 
-// Função principal que configura os "escutadores de eventos"
+// Quando a página terminar de carregar
 function setupAutenticacaoListeners() {
-    // Escutador para validar a senha
-    document.body.addEventListener('input', function(event) {
-        if (event.target.id === 'confirmarSenha') {
-            const senhaInput = document.getElementById("senha");
-            const confirmarSenhaInput = event.target;
-            const senha = senhaInput.value;
-            const confirmarSenha = confirmarSenhaInput.value;
 
-            if (confirmarSenha.length === 0) {
-                confirmarSenhaInput.classList.remove('input-error', 'input-success');
-            } else if (senha === confirmarSenha) {
-                confirmarSenhaInput.classList.remove('input-error');
-                confirmarSenhaInput.classList.add('input-success');
-            } else {
-                confirmarSenhaInput.classList.remove('input-success');
-                confirmarSenhaInput.classList.add('input-error');
-            }
+    const formLogin = document.getElementById('login-form');
+    const senhaInput = document.getElementById("senha");
+    const confirmarSenhaInput = document.getElementById("confirmarSenha");
+
+    confirmarSenhaInput.addEventListener('input', function () {
+        const senha = senhaInput.value;
+        const confirmarSenha = confirmarSenhaInput.value;
+
+        if (confirmarSenha.length === 0) {
+            // Se ainda não digitou nada, limpa tudo
+            confirmarSenhaInput.classList.remove('input-error', 'input-success');
+        } else if (senha === confirmarSenha) {
+            // Se baterem certinho
+            confirmarSenhaInput.classList.remove('input-error');
+            confirmarSenhaInput.classList.add('input-success');
+        } else {
+            // Se estiverem diferentes
+            confirmarSenhaInput.classList.remove('input-success');
+            confirmarSenhaInput.classList.add('input-error');
         }
     });
 
-    // Anexa o "escutador" ao corpo do documento para garantir que ele sempre funcione,
-    // mesmo que o formulário seja carregado dinamicamente.
-    document.body.addEventListener('submit', async function (event) {
-        // Verifica se o evento de submit veio do nosso formulário de login
-        if (event.target.id !== 'login-form') {
-            return; // Se não for, ignora.
-        }
+    formLogin.addEventListener('submit', async function (event) {
 
-        event.preventDefault(); // Previne o envio padrão da página
-
-        const senhaInput = document.getElementById("senha");
-        const confirmarSenhaInput = document.getElementById("confirmarSenha");
+        event.preventDefault();
 
         if (modoAtual === 'cadastro') {
-            if (senhaInput.value !== confirmarSenhaInput.value) {
+            const senha = senhaInput.value;
+            const confirmarSenha = confirmarSenhaInput.value;
+
+            if (senha !== confirmarSenha) {
                 mostrarMensagem('error', 'As senhas não coincidem.');
-                return;
+                confirmarSenhaInput.classList.add('input-error');
+                confirmarSenhaInput.classList.remove('input-success');
+                return; // Para o envio
+            } else {
+                confirmarSenhaInput.classList.remove('input-error');
+                confirmarSenhaInput.classList.add('input-success');
             }
         }
 
-        const formData = new URLSearchParams(new FormData(event.target));
-        const formAction = event.target.action;
+        // Se passou da validação, então agora monta o formData:
+        const formData = new URLSearchParams();
+        if (modoAtual === 'cadastro') {
+            formData.append("nome", document.getElementById("nome").value);
+            formData.append("email", document.getElementById("email").value);
+            formData.append("senha", document.getElementById("senha").value);
+            formData.append("confirmarSenha", document.getElementById("confirmarSenha").value);
+        } else {
+            formData.append("email", document.getElementById("email").value);
+            formData.append("senha", document.getElementById("senha").value);
+        }
 
         try {
-            const response = await fetch(formAction, {
+            const response = await fetch(formLogin.action, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
                 body: formData
             });
-
             if (response.ok) {
                 const resultado = await response.json();
 
@@ -142,41 +153,62 @@ function setupAutenticacaoListeners() {
                         position: 'top-end',
                         showConfirmButton: false,
                         timer: 2000,
-                        timerProgressBar: true
-                    });
-                    Toast.fire({
-                        icon: "success",
-                        title: "Logado com sucesso!"
+                        timerProgressBar: true,
+                        backdrop: false,
+                        showClass: {
+                            popup: 'animate__animated animate__fadeInRight animate__faster'
+                        },
+                        hideClass: {
+                            popup: 'animate__animated animate__fadeOutRight animate__faster'
+                        },
+                        didOpen: (toast) => {
+                            toast.onmouseenter = Swal.stopTimer;
+                            toast.onmouseleave = Swal.resumeTimer;
+                        }
                     });
 
+                    if (modoAtual === 'login') {
+                        Toast.fire({
+                            icon: "success",
+                            title: "Logado com sucesso!"
+                        });
+                    } else if (modoAtual === 'cadastro') {
+                        mostrarMensagem('success', 'Cadastro efetuado! Seja bem-vindo!');
+                        Toast.fire({
+                            icon: "success",
+                            title: "Logado com sucesso!"
+                        });
+                    }
+
+                    //salvar usuario na sessao.
                     localStorage.setItem("nome", resultado.nome);
                     localStorage.setItem("isadmin", resultado.isadmin);
                     localStorage.setItem("ispremium", resultado.ispremium);
 
-                    // =================================================================
-                    // OTIMIZAÇÃO: Passamos o objeto 'resultado' que acabamos de receber
-                    // diretamente para a função que atualiza o menu.
-                    // Isso é mais direto e evita possíveis problemas de timing.
-                    // =================================================================
+
+                    const usuario = await getUserState();
                     updateMenuContent(usuario);
 
-                    // SUGESTÃO: Fechar o modal de login após o sucesso
-                    // Encontre o seu modal pelo ID e use o método para escondê-lo.
-                    // Exemplo: document.getElementById('seuModalDeLogin').style.display = 'none';
 
                 } else {
                     mostrarMensagem('error', resultado.mensagem);
                 }
-            } else {
+            }
+            else
+            {
                 mostrarMensagem('error', 'Erro no servidor. Código: ' + response.status);
             }
-        } catch (erro) {
+
+        }
+        catch
+            (erro)
+        {
             console.error("Erro de rede:", erro);
             mostrarMensagem('error', 'Erro de rede ou servidor.');
         }
     });
 }
 
-// Expõe as funções globalmente para que possam ser chamadas de outros scripts
+
 window.setupForm = setupForm;
 window.setupAutenticacaoListeners = setupAutenticacaoListeners;
