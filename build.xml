@@ -10,6 +10,15 @@
 <project name="Quiz-Enem" default="default" basedir=".">
     <description>Builds, tests, and runs the project Quiz-Enem.</description>
     <import file="nbproject/build-impl.xml"/>
+
+    <target name="-pre-dist">
+        <echo message="Copiando bibliotecas (.jar) para a pasta de build..."/>
+        <mkdir dir="${build.web.dir}/WEB-INF/lib"/>
+        <copy todir="${build.web.dir}/WEB-INF/lib">
+            <fileset dir="lib" includes="**/*.jar"/>
+        </copy>
+    </target>
+
     <!--
 
     There exist several targets which are by default empty and which can be 
