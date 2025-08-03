@@ -1,4 +1,4 @@
-import { getUserState, toggleLoginState } from '/Quiz-Enem/menu/userState.js';
+import { getUserState, toggleLoginState } from '/menu/userState.js';
 // Substitua pelo seu Client ID do Google Cloud
 const CLIENT_ID = '38814715322-327dbngal89ptbne74bqmfnc8e2e2qtc.apps.googleusercontent.com';
 
