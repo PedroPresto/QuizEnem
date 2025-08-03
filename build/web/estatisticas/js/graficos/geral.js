@@ -6,8 +6,12 @@ export function criarGraficoGeral(estatisticas, chartInstance, resetarCanvas) {
     document.querySelector('.metric-label.top').textContent = "Taxa de Acertos";
     document.querySelector('.metric-value.top').textContent = estatisticas.taxaTotal + "%";
 
-    
-    
+    const subbotoes = document.querySelectorAll('.secundario');
+
+    subbotoes.forEach(botao => {
+        botao.style.display = 'none';
+    });
+
     const ctx = resetarCanvas();
     if (chartInstance.value)
         chartInstance.value.destroy();
@@ -17,17 +21,17 @@ export function criarGraficoGeral(estatisticas, chartInstance, resetarCanvas) {
         data: {
             labels: ['Respondidas', 'Acertos', 'Erros'],
             datasets: [{
-                    label: 'Resumo de Quest\u00f5es',
-                    data: [estatisticas.respondidas, estatisticas.acertos, estatisticas.erros],
-                    backgroundColor: ['#6C63FF', '#10B981', '#EF4444'],
-                    borderColor: ['#6C63FF', '#10B981', '#EF4444'],
-                    borderWidth: 1,
-                    borderRadius: 6,
-                    borderSkipped: false,
-                    barThickness: '36',
-                    categoryPercentage: 0.6,
-                    barPercentage: 0.7
-                }]
+                label: 'Resumo de Quest\u00f5es',
+                data: [estatisticas.respondidas, estatisticas.acertos, estatisticas.erros],
+                backgroundColor: ['#6C63FF', '#10B981', '#EF4444'],
+                borderColor: ['#6C63FF', '#10B981', '#EF4444'],
+                borderWidth: 1,
+                borderRadius: 6,
+                borderSkipped: false,
+                barThickness: '36',
+                categoryPercentage: 0.6,
+                barPercentage: 0.7
+            }]
         },
         options: {
             responsive: true,

@@ -1,6 +1,7 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<html lang="pt-br" data-theme="dark">
     <head>
+
         <title>Resultado do Simulado</title>
         <%@ include file="/includes/head.jsp"%>
         <link rel="stylesheet" href="resultadoSimulado/resultado.css" />
@@ -20,7 +21,7 @@
 
                     <div class="progress-container animate-fade-in" style="animation-delay: 0.4s">
                         <h3>Taxa de Aproveitamento</h3>
-                        <div class="trend-indicator positive"><i class="fas fa-arrow-up"></i> 1,3% acima da mÈdia</div>
+                        <div class="trend-indicator positive"><i class="fas fa-arrow-up"></i> 1,3% acima da m√©dia</div>
                         <div class="progress-bar">
                             <div id="progressBar" class="progress-bar-fill"></div>
                         </div>
@@ -30,11 +31,11 @@
 
                 <div class="right-panel">
                     <div class="stats-table animate-fade-in" style="animation-delay: 0.8s">
-                        <h3>EstatÌsticas Detalhadas</h3>
+                        <h3>Estat√°tiscas Detalhadas</h3>
                         <table>
                             <thead>
                                 <tr>
-                                    <th>MÈtrica</th>
+                                    <th>M√©trica</th>
                                     <th>Valor</th>
                                     <th>Porcentagem</th>
                                 </tr>
@@ -45,7 +46,7 @@
 
                     <div class="cards-container">
                         <div class="card animate-fade-in">
-                            <h3><i class="fas fa-list-ol total"></i> Total de Questıes</h3>
+                            <h3><i class="fas fa-list-ol total"></i> Total de Quest√µes</h3>
                             <p id="totalQuestions">-</p>
                         </div>
                         <div class="card animate-fade-in" style="animation-delay: 0.2s">
@@ -57,7 +58,7 @@
                             <p id="wrongAnswers" class="error">-</p>
                         </div>
                         <div class="card animate-fade-in" style="animation-delay: 0.6s">
-                            <h3><i class="fas fa-question-circle warning"></i> N„o Respondidas</h3>
+                            <h3><i class="fas fa-question-circle warning"></i> N√£o Respondidas</h3>
                             <p id="unansweredQuestions" class="warning">-</p>
                         </div>
                     </div>

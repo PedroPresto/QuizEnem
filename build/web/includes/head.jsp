@@ -8,7 +8,9 @@
   })();
 </script>
 
+
 <!-- 2. ? Metadados b�sicos -->
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!-- 3. ? Pr�-conex�o para fontes (reduz o tempo de DNS/TLS) -->
@@ -35,7 +37,7 @@
 </script>
 
 <!-- 8. ? Bibliotecas JS (com `defer` para evitar bloqueio do render) -->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
 
 <!-- 9. ? M�dulo do menu (moderno, executa depois automaticamente) -->

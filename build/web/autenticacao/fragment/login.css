@@ -11,6 +11,31 @@
     --google-button-text: #1f2937;
 }
 
+.google-button-wrapper {
+    height: 45px;
+    max-width: 350px;
+    margin: 20px auto;
+
+}
+
+#login-form #google-signin-button {
+    max-width: 420px; /* Mantém o container com largura total se desejado, ou pode ser auto */
+    display: block; /* Usa flexbox para alinhar o conteúdo */
+    justify-content: center; /* Centraliza o botão do Google horizontalmente */
+    align-items: center; /* Centraliza verticalmente se houver altura definida */
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-family: sans-serif;
+    font-size: 14px;
+}
+
+
+
+
+.google-div {
+    overflow: hidden;
+}
+
 /* Inputs */
 .form-group {
     margin-bottom: 1.25rem;

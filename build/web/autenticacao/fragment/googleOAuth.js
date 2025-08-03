@@ -51,7 +51,7 @@ function mostrarToast(tipo, texto) {
                             timerProgressBar: true,
                             backdrop: false,
                             showClass: {
-                                popup: 'animate__animated animate__fadeInRight animate__faster'
+                                popup: 'animate__animated animate__fadeInRight yy'
                             },
                             hideClass: {
                                 popup: 'animate__animated animate__fadeOutRight animate__faster'

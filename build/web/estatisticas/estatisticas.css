@@ -26,6 +26,7 @@ body {
     background-color: var(--background-color);
     color: var(--text-primary);
     line-height: 1.5;
+    padding: 3rem 0;
 }
 
 .container {
@@ -356,19 +357,18 @@ body {
     display: flex;
     gap: 0px;
     margin-bottom: 1rem;
-    align-items: center; 
+    align-items: center;
     justify-content: center;
     text-align: center;
 }
 
 .secundario {
-    display: block-flex;
-    margin-top: 1rem;
+    display: none;
+    justify-content: center;
     width: 70%;
-    align-items: center !important;
+    margin: 20px auto;
     gap: 0px;
-    margin-bottom: 1rem;
-    justify-content: center; 
+
 }
 
 
@@ -387,6 +387,8 @@ body {
 
 .sub {
     display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .botao-switch:hover {

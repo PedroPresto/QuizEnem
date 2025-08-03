@@ -1,83 +1,123 @@
-
+import {getUserState} from './menu/userState.js';
+import {criarFormularioLogin} from './menu/menu.js';
 
 document.addEventListener("DOMContentLoaded", function () {
 
-//iniciarSimulad("idMateria", "numero de questoes")
+    // Objeto com todas as imagens dos cards (com as novas adições)
+    const cardImages = {
+        "cardProvasAnteriores": "assets/anteriores.png",
+        "cardCriarSimulado": "assets/criarSimulado.png",
+        "cardLinguagens": "assets/linguagens.png",
+        "cardMatematica": "assets/matematica.png",
+        "cardFisica": "assets/fisica.png",
+        "cardQuimica": "assets/quimica.png",
+        "cardBiologia": "assets/biologia.png",
+        "cardGeografia": "assets/geografia.png",
+        "cardHistoria": "assets/historia.png",
+        "cardSociologia": "assets/sociologia.png",
+        "cardFilosofia": "assets/filosofia.png",
+        "cardIngles": "assets/ingles.png",
+        "cardEspanhol": "assets/espanhol.png",
+        "cardLiteratura": "assets/literatura.png", // <- Corrigido
+        "cardArtes": "assets/artes.png",         // <- Corrigido
+        "cardTI": "assets/TI.png",                // <- Corrigido
+        "cardEF": "assets/EF.png"                // <- Corrigido
+    };
 
-// Cards de Simulados
-    
+    // Loop para aplicar as imagens de fundo
+    for (const cardId in cardImages) {
+        const cardElement = document.getElementById(cardId);
+        if (cardElement) {
+            const imagePath = cardImages[cardId];
+            cardElement.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('${contextPath}/${imagePath}')`;
+        }
+    }
+
+    // --- O RESTANTE DO SEU CÓDIGO (JÁ ESTÁ CORRETO) ---
+
+    // Função para os cards principais
     selecionarQuestoes("provasAnteriores");
-        
-    handleCardClick("dev-card", "1", "20", "Montando simulado de Testes\u2026");
-    handleCardClick("cardLinguagens", "3", "20", "Carregando Linguagens e C\u00F3digos\u2026");
-    handleCardClick("cardMatematica", "10", "20", "Preparando quest\u00F5es de Matem\u00E1tica\u2026");
-    handleCardClick("cardFisica", "12", "20", "Preparando quest\u00F5es de F\u00EDsica\u2026");
-    handleCardClick("cardQuimica", "13", "20", "Preparando quest\u00F5es de Qu\u00EDmica\u2026");
-    handleCardClick("cardBiologia", "11", "20", "Desvendando a Biologia\u2026");
-    handleCardClick("cardGeografia", "15", "20", "Explorando quest\u00F5es de Geografia\u2026");
-    handleCardClick("cardHistoria", "14", "20", "Viajando pela Hist\u00F3ria\u2026");
-    handleCardClick("cardSociologia", "17", "20", "Desvendando a Sociologia\u2026");
-    handleCardClick("cardFilosofia", "16", "20", "Pegando um caf\u00E9 para filosofar\u2026");
-    handleCardClick("cardIngles", "5", "10", "Entrando no mundo do Ingl\u00EAs\u2026");
-    handleCardClick("cardEspanhol", "6", "10", "\u00A1Preparando quest\u00F5es de Espa\u00F1ol!");
+
+    const devCardButton = document.getElementById('dev-card');
+    if (devCardButton) {
+        devCardButton.addEventListener('click', async (e) => {
+            e.preventDefault();
+            const usuario = await getUserState();
+            if (usuario && usuario.isLoggedIn) {
+                window.location.href = `${contextPath}/criarSimulado/simuladoLivre.jsp`;
+            } else {
+                criarFormularioLogin();
+            }
+        });
+    }
+
+    // Configura os cliques para todos os cards de matéria
+    setupSubjectCardClick("cardLinguagens", "3");
+    setupSubjectCardClick("cardMatematica", "10");
+    setupSubjectCardClick("cardFisica", "12");
+    setupSubjectCardClick("cardQuimica", "13");
+    setupSubjectCardClick("cardBiologia", "11");
+    setupSubjectCardClick("cardGeografia", "15");
+    setupSubjectCardClick("cardHistoria", "14");
+    setupSubjectCardClick("cardSociologia", "17");
+    setupSubjectCardClick("cardFilosofia", "16");
+    setupSubjectCardClick("cardIngles", "5");
+    setupSubjectCardClick("cardEspanhol", "6");
+    // Adiciona a lógica de clique para os novos cards
+    setupSubjectCardClick("cardLiteratura", "4");
+    setupSubjectCardClick("cardArtes", "8");
+    setupSubjectCardClick("cardTI", "9");
+    setupSubjectCardClick("cardEF", "7");
 
     function selecionarQuestoes(cardId) {
         const card = document.getElementById(cardId);
         if (card) {
-            card.addEventListener("click", (e) => {
-                window.location.href = contextPath + "/criarSimulado/criarSimulado.jsp";
-                
+            card.addEventListener("click", async (e) => {
+                e.preventDefault();
+                const usuario = await getUserState();
+                if (usuario && usuario.isLoggedIn) {
+                    window.location.href = contextPath + "/criarSimulado/criarSimulado.jsp";
+                } else {
+                    criarFormularioLogin();
+                }
             });
         }
     }
-    
 
-    function handleCardClick(cardId, materia, quantidade, mensagemLoading) {
+    function setupSubjectCardClick(cardId, materiaId) {
         const card = document.getElementById(cardId);
         if (card) {
-            card.addEventListener("click", (e) => {
+            card.addEventListener("click", async (e) => {
                 e.preventDefault();
-                const spinner = document.getElementById("loadingSpinner");
-                const message = document.getElementById("loadingMessage");
-                if (spinner && message) {
-                    spinner.style.display = "flex";
-                    message.textContent = mensagemLoading;
+                const usuario = await getUserState();
+                if (usuario && usuario.isLoggedIn) {
+                    window.location.href = `${contextPath}/criarSimulado/selecionarSubmaterias.jsp?idMateria=${materiaId}`;
+                } else {
+                    criarFormularioLogin();
                 }
-
-                setTimeout(() => {
-                    iniciarSimulado(materia, quantidade);
-                }, 600);
             });
-            console.log(`Clique no card ${cardId} ativado.`);
-        } else {
-            console.warn(`Card ${cardId} não encontrado no DOM.`);
         }
     }
-    
-     const quickActions = document.getElementById('quick-actions');
-    quickActions.querySelectorAll('.btn').forEach(item => {
-        item.addEventListener('click', handleMenuItemClick);
-    });
-    
-    function handleMenuItemClick(e) {
-    e.preventDefault();   
-    const action = e.currentTarget.getAttribute('data-action');
-    switch (action) {
-       
-        case 'irEstatisticas':
-            window.location.href = contextPath + "/estatisticas";
-            break;
-        
-        case 'criarSimulado':
-            window.location.href = contextPath + "/criarSimulado/criarSimulado.jsp"; // <- sua função customizada
-            break;
-       
-        default:
-            console.log('Ação não reconhecida:', action);
+
+    const quickActions = document.getElementById('quick-actions');
+    if(quickActions) {
+        quickActions.querySelectorAll('.btn').forEach(item => {
+            item.addEventListener('click', handleMenuItemClick);
+        });
     }
 
-
-}
-
-
+    async function handleMenuItemClick(e) {
+        e.preventDefault();
+        const action = e.currentTarget.getAttribute('data-action');
+        const usuario = await getUserState();
+        if (usuario && usuario.isLoggedIn) {
+            if (action === 'irEstatisticas') {
+                window.location.href = contextPath + "/estatisticas";
+            } else if (action === 'criarSimulado') {
+                window.location.href = contextPath + "/criarSimulado/simuladoLivre.jsp";
+            }
+        } else {
+            criarFormularioLogin();
+        }
+    }
 });

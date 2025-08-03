@@ -2,8 +2,10 @@
 let isMenuOpen = false;
 let materia = localStorage.getItem("materia");
 let isPremium = false;
+var isLoggedIn = false;
+let isAdmin = false;
 
-import { getUserState, toggleLoginState } from './userState.js';
+import {getUserState, toggleLoginState} from './userState.js';
 
 
 // Function to create and inject the menu HTML
@@ -87,6 +89,9 @@ async function updateMenuContent(usuario) {
     const isStatisticsPage = currentPath.includes('criarSimulado') || currentPath.includes('estatisticas') || currentPath.includes('revisao');
 
     isPremium = usuario.isPremium;
+    isLoggedIn = usuario.isLoggedIn
+    isAdmin = usuario.isAdmin;
+
     console.log("usuario menu2:", usuario);
     console.log("Tipo de usuário:", typeof usuario);
     console.log("Campos:", usuario?.nome, usuario?.id, usuario?.isLoggedIn);
@@ -97,30 +102,30 @@ async function updateMenuContent(usuario) {
     </div> 
 
     <div class="menu-section profile-section"> <!-- SEÇÃO PERFIL -->
- 
+
       <div class="user-profile"> 
   <div class="avatar-container">
     <div class="avatar">
       ${usuario.isLoggedIn && usuario.foto
-            ? `<img src="${usuario.foto}" alt="Avatar" class="avatar-img">`
-            : (usuario.isLoggedIn && usuario.iniciais
-                    ? usuario.iniciais
-                    : '?')}
+        ? `<img src="${usuario.foto}" alt="Avatar" class="avatar-img">`
+        : (usuario.isLoggedIn && usuario.iniciais
+            ? usuario.iniciais
+            : '?')}
     </div>
   </div>
 
   <div class="user-info">
-    <div class="user-name">${usuario.isLoggedIn ? usuario.nome : 'Visitante'}</div>
+    <div class="user-name">Olá, ${usuario.isLoggedIn ? usuario.nome : 'Visitante'}</div>
 
     ${
-            usuario.isLoggedIn
+        usuario.isLoggedIn
             ? (
-                    usuario.isPremium
+                usuario.isPremium
                     ? `<button class="menu-btn premium-btn shine-btn" disabled>Premium Ativo</button>`
                     : `<button class="menu-btn premium-btn shine-btn">Obter Premium</button>`
-                    )
+            )
             : `<button class="menu-btn login-btn login-btntest">Fazer Login</button>`
-            }
+    }
   </div>
 </div>
 </div>
@@ -130,41 +135,42 @@ async function updateMenuContent(usuario) {
       <div class="section-title">${isIndexPage || isStatisticsPage ? 'Página Inicial' : 'Simulado'}</div>
       <ul class="menu-list">
         ${isIndexPage || isStatisticsPage ? ` <!-- SEÇÃO PÁGINA INICIAL INDEX -->
-            
-            
+
+
           <li><a href="#stats" class="menu-item" data-action="irEstatisticas"><i class="fas fa-chart-line icon"></i> Meu progresso</a></li>
           <li><a href="#respondidas" class="menu-item" data-action="fazerRevisao"><i class="fas fa-list-check icon"></i> Fazer Revisão</a></li>
           <li><a href="#continuar" class="menu-item ${!materia ? 'disabled' : ''}"  ${materia ? 'data-action="retomarSimulado"' : ''}><i class="fas fa-forward icon"></i> Retomar simulado</a></li>
           ${isStatisticsPage ? `<li><a href="${contextPath}/index.jsp" class="menu-item" data-action="home"><i class="fas fa-house icon"></i> Voltar ao início</a></li>` : ''}
           ${isStatisticsPage ? `<li><a href="#theme" data-action="toggleTheme" class="menu-item"><i class="fas fa-circle-half-stroke icon"></i> Alterar tema</a></li>` : ''}
-          
+
         `
-            : isSimuladoPage || isResultadoPage ? ` <!-- SEÇÃO PÁGINA INICIAL SIMULADO -->
+        : isSimuladoPage || isResultadoPage ? ` <!-- SEÇÃO PÁGINA INICIAL SIMULADO -->
 
           <li><a href="reiniciarSimulado" class="menu-item" data-action="reiniciarSimulado"><i class="fas fa-rotate-right icon"></i> Reiniciar simulado</a></li>
           ${isSimuladoPage ? `<li><a href="#stats" class="menu-item" data-action="finalizarSimulado"><i class="fas fa-chart-bar icon"></i>Encerrar e ver desempenho</a></li>` : ''}
-          <li><a href="${contextPath}/index.jsp" class="menu-item" data-action="home"><i class="fas fa-house icon"></i> Voltar ao início</a></li>
-          <li><a href="#theme" data-action="toggleTheme" class="menu-item"><i class="fas fa-circle-half-stroke icon"></i> Alterar tema</a></li>
-
         ` : `
           <li><a href="${contextPath}/index.jsp" class="menu-item" data-action="home"><i class="fas fa-house icon"></i> Voltar ao início</a></li>
-          <li><a href="#theme" data-action="toggleTheme" class="menu-item"><i class="fas fa-circle-half-stroke icon"></i> Alterar tema</a></li>
+          
         `}
       </ul>
     </div>
-    
+
     <!-- GERAL -->
     ${usuario.isLoggedIn ? `
       <div class="menu-section general-section"> 
         <div class="section-title">Geral</div>
         <ul class="menu-list">
+        ${isSimuladoPage || isResultadoPage ? `
+          <li><a href="${contextPath}/index.jsp" class="menu-item" data-action="home"><i class="fas fa-house icon"></i> Voltar ao início</a></li> 
+          <li><a href="#theme" data-action="toggleTheme" class="menu-item"><i class="fas fa-circle-half-stroke icon"></i> Alterar tema</a></li>
+    ` : ''}
           <li><a href="#logout" class="menu-item" data-action="criarSimulado"><i class="fa-solid fa-pen-to-square icon"></i> Criar Simulado</a></li>  
           <li><a href="#logout" class="menu-item"><i class="fa-solid fa-user-group icon"></i> Quiz Multiplayer</a></li>
-          <li><a href="adminReview" class="menu-item" data-action="irAdminReview"><i class="fa-solid fa-user-group icon"></i> Admin Review</a></li>
+         ${usuario.isAdmin ? ` <li><a href="adminReview" class="menu-item" data-action="irAdminReview"><i class="fa-solid fa-user-group icon"></i> Admin Review</a></li> ` : '' }
         </ul>
       </div>
     ` : ''}
- 
+
     <!-- RODAPÉ FIXO -->
     ${usuario.isLoggedIn ? `
       <div class="menu-section rodape"> 
@@ -172,7 +178,7 @@ async function updateMenuContent(usuario) {
         <ul class="menu-list">
           <li><a href="#logout" class="menu-item"><i class="fa-solid fa-user icon"></i> Meu Perfil</a></li>
           <li><a href="#logout" class="menu-item" data-action="logout"><i class="fas fa-right-from-bracket icon"></i> Sair</a></li>
-          
+
         </ul>
       </div>
     ` : ''}
@@ -190,15 +196,15 @@ async function updateMenuContent(usuario) {
                 fetch("CriarSessaoCheckout", {
                     method: "POST"
                 })
-                        .then(response => response.text())
-                        .then(url => {
-                            if (url.startsWith("http")) {
-                                window.location.href = url;
-                            } else {
-                                console.error("URL inválida:", url);
-                            }
-                        })
-                        .catch(err => console.error("Erro:", err));
+                    .then(response => response.text())
+                    .then(url => {
+                        if (url.startsWith("http")) {
+                            window.location.href = url;
+                        } else {
+                            console.error("URL inválida:", url);
+                        }
+                    })
+                    .catch(err => console.error("Erro:", err));
             } else {
                 criarFormularioLogin();
             }
@@ -214,15 +220,15 @@ async function updateMenuContent(usuario) {
                 fetch("CriarSessaoCheckout", {
                     method: "POST"
                 })
-                        .then(response => response.text())
-                        .then(url => {
-                            if (url.startsWith("http")) {
-                                window.location.href = url;
-                            } else {
-                                console.error("URL inválida:", url);
-                            }
-                        })
-                        .catch(err => console.error("Erro:", err));
+                    .then(response => response.text())
+                    .then(url => {
+                        if (url.startsWith("http")) {
+                            window.location.href = url;
+                        } else {
+                            console.error("URL inválida:", url);
+                        }
+                    })
+                    .catch(err => console.error("Erro:", err));
             } else {
                 //window.location.href = contextPath + "/autenticacao/login.jsp";
             }
@@ -231,38 +237,34 @@ async function updateMenuContent(usuario) {
     }
 }
 
-function criarFormularioLogin() {
+export function criarFormularioLogin() {
     fetch(contextPath + "/autenticacao/loginFormFragment.jsp")
         .then(res => res.text())
         .then(html => {
             Swal.fire({
                 title: 'Faça Login para continuar',
-                theme: 'dark', // Este tema é para o SweetAlert, não para o Google One Tap
+                theme: 'dark',
                 html: `
-                        <form id="login-form" class ="login-form" method="POST" action="${contextPath}/login">
-                            <div id="feedback" class="feedback"></div>
-                            ${html}
-                            <div class="form-options">
-                                <button type="submit" class="login-button" id="botaoSubmit">
-                                    <span class="button-text">Entrar</span>
-                                    <div class="button-shine"></div>
-                                </button>
-                            </div>
-                            <p class="signup-link" id="alternarMensagem">
-                                Ainda não tem conta? <a href="#" id="linkCadastro">Cadastre-se</a>
-                            </p>
-                        </form>
-                    `,
-                customClass: {
-                    title: 'my-sw-title',
-                    popup: 'my-swal',
-                    htmlContainer: 'my-sw-text'
-                },
+          <form id="login-form" method="POST" action="${contextPath}/login">
+            <div id="feedback" class="feedback"></div>
+            ${html}
+            <div class="form-options">
+              <button type="submit" class="login-button" id="botaoSubmit">
+                <span class="button-text">Entrar</span>
+                <div class="button-shine"></div>
+              </button>
+            </div>
+            <p class="signup-link" id="alternarMensagem">
+              Ainda não tem conta? <a href="#" id="linkCadastro">Cadastre-se</a>
+            </p>
+          </form>
+        `,
+
                 showClass: {
-                    popup: 'animate__animated animate__fadeUp animate__faster'
+                    popup: 'animate__animated animate__fadeIn' // já tem nossa animação via CSS
                 },
                 hideClass: {
-                    popup: 'animate__animated animate__fadeOut animate__faster'
+                    popup: 'animate__animated animate__fadeOut' // ou use outra animação
                 },
                 showConfirmButton: false,
                 showCloseButton: true,
@@ -270,65 +272,50 @@ function criarFormularioLogin() {
                 didOpen: () => {
                     setupForm('login');
                     setupAutenticacaoListeners();
+                    // Agora sim: só renderiza o botão depois que o DOM foi montado
+                    const googleBtn = document.getElementById('google-signin-button');
+                    const googleButtonContainer = document.getElementById('google-signin-button');
 
-                    if (window.google) {
+                    const containerWidth = googleButtonContainer.offsetWidth;
+                    if (window.google && googleBtn) {
                         google.accounts.id.initialize({
+                            auto_select: true,
                             client_id: "38814715322-327dbngal89ptbne74bqmfnc8e2e2qtc.apps.googleusercontent.com",
                             callback: window.handleCredentialResponse,
-                            // ATRIBUTO PARA O TEMA DARK DO ONE TAP:
-                            theme: 'dark', // <------------------ AQUI!
-                            ux_mode: 'popup',
-                            // auto_select: false, // Mantenha false para evitar o encolhimento do botão normal
-                            // cancel_on_tap_outside: false // Opcional: para controlar o fechamento do One Tap
+                            ux_mode: 'popup'
                         });
-
-                        // Renderizar o botão "Sign in with Google" se ainda o usa:
-                        const googleBtn = document.getElementById('google-signin-button');
-                        if (googleBtn) {
-                            google.accounts.id.renderButton(
-                                googleBtn,
-                                {
-                                    theme: 'outline', // Este theme é para o *botão renderizado*.
-                                    size: 'large',
-                                    shape: 'rectangular',
-                                    logo_alignment: 'left',
-                                    width: "380" // Ajuste conforme a largura desejada
-                                }
-                            );
-                        }
-
-                        // Chame o One Tap APÓS a inicialização
-                        google.accounts.id.prompt((notification) => {
-                            if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
-                                console.log("Google One Tap not displayed or skipped.");
+                        google.accounts.id.renderButton(
+                            document.getElementById('google-signin-button'),
+                            {
+                                theme: 'outline',
+                                size: 'large',
+                                shape: 'square',
+                                text: 'Entrar com Google',
+                                logo_alignment: 'left',
+                                width: containerWidth.toString()
                             }
-                        });
-
-                    } else {
-                        console.error("Google Identity Services library (GSI) not loaded.");
+                        );
                     }
+
                 }
             });
         });
 }
 
 
-
-
-
 function criarSessaoCheckout() {
     fetch("CriarSessaoCheckout", {
         method: "POST"
     })
-            .then(response => response.text())
-            .then(url => {
-                if (url.startsWith("http")) {
-                    window.location.href = url;
-                } else {
-                    console.error("URL inválida:", url);
-                }
-            })
-            .catch(err => console.error("Erro:", err));
+        .then(response => response.text())
+        .then(url => {
+            if (url.startsWith("http")) {
+                window.location.href = url;
+            } else {
+                console.error("URL inválida:", url);
+            }
+        })
+        .catch(err => console.error("Erro:", err));
 }
 
 function irRevisao() {
@@ -342,12 +329,14 @@ function irRevisao() {
 function irRetomarSimulado() {
     let materia = localStorage.getItem("materia");
 
+    if (materia == null) { materia = "Simulado Personalizado"; }
+
     let qQntd = localStorage.getItem("qQntd");
     if (materia && qQntd) {
         Swal.fire({
             title: 'Retomar último simulado?',
             html: 'Matéria: <strong>' + materiaFront + '</strong><br>' +
-                    'Questões: <strong>' + qQntd + '</strong>',
+                'Questões: <strong>' + qQntd + '</strong>',
             icon: 'question',
             theme: 'dark',
             showCancelButton: true,
@@ -412,58 +401,58 @@ function irReiniciarSimulado() {
 }
 
 function irAdminReview() {
-        Swal.fire({
-            title: '🔍 Analisar Questões',
-            input: 'number',
-            theme: 'dark',
-            inputLabel: 'Insira o ID inicial da questão:',
-            inputPlaceholder: 'Ex: 30',
-            confirmButtonText: 'Analisar Questões',
-            showCancelButton: true,
-            cancelButtonText: 'Cancelar',
-            inputValidator: (value) => {
-                if (!value || isNaN(value) || value <= 0) {
-                    return 'Digite um ID válido (número maior que zero)';
-                }
+    Swal.fire({
+        title: '🔍 Analisar Questões',
+        input: 'number',
+        theme: 'dark',
+        inputLabel: 'Insira o ID inicial da questão:',
+        inputPlaceholder: 'Ex: 30',
+        confirmButtonText: 'Analisar Questões',
+        showCancelButton: true,
+        cancelButtonText: 'Cancelar',
+        inputValidator: (value) => {
+            if (!value || isNaN(value) || value <= 0) {
+                return 'Digite um ID válido (número maior que zero)';
             }
-        }).then((result) => {
-            if (result.isConfirmed) {
-                const idInicial = parseInt(result.value);
-                iniciarSimuladoAdmin(idInicial);
-            }
-        });
-    }
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+            const idInicial = parseInt(result.value);
+            iniciarSimuladoAdmin(idInicial);
+        }
+    });
+}
 
 function iniciarSimuladoAdmin(idInicio) {
-  resetarEstatisticas();
+    resetarEstatisticas();
 
-  fetch(`${contextPath}/getQuestoesPorIdInicial`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded"
-    },
-    body: `idInicio=${encodeURIComponent(idInicio)}`
-  })
-  .then(res => res.json())
-  .then(ids => {
-    if (!ids || ids.length === 0) {
-      alert("Nenhuma questão encontrada a partir do ID informado.");
-      return;
-    }
+    fetch(`${contextPath}/getQuestoesPorIdInicial`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: `idInicio=${encodeURIComponent(idInicio)}`
+    })
+        .then(res => res.json())
+        .then(ids => {
+            if (!ids || ids.length === 0) {
+                alert("Nenhuma questão encontrada a partir do ID informado.");
+                return;
+            }
 
-    const idsParam = ids.join(",");
+            const idsParam = ids.join(",");
 
-    localStorage.setItem("idsQuestoes", idsParam);
-    localStorage.setItem("qQntd", ids.length);
-    localStorage.setItem("materia", "admin");
-    localStorage.setItem("anoSimulado", "admin");
+            localStorage.setItem("idsQuestoes", idsParam);
+            localStorage.setItem("qQntd", ids.length);
+            localStorage.setItem("materia", "admin");
+            localStorage.setItem("anoSimulado", "admin");
 
-    window.location.href = `${contextPath}/iniciarSimulado?materia=admin&ids=${idsParam}&indice=0`;
-  })
-  .catch(err => {
-    console.error("Erro ao buscar IDs por ID inicial:", err);
-    alert("Erro ao iniciar simulado (modo admin).");
-  });
+            window.location.href = `${contextPath}/iniciarSimulado?materia=admin&ids=${idsParam}&indice=0`;
+        })
+        .catch(err => {
+            console.error("Erro ao buscar IDs por ID inicial:", err);
+            alert("Erro ao iniciar simulado (modo admin).");
+        });
 }
 
 
@@ -547,7 +536,7 @@ function goPremium() {
         html: `
     <p style="margin-bottom: 1em;">Assine para desbloquear recursos avançados:</p>
     <ul style="text-align: left; list-style: none; padding-left: 0; font-size: 1.1rem;>
-      <li style="margin-bottom: 0.5em;"><i class="fa-regular fa-circle-check" style="color: #10b981; margin-right: 0.2em;"></i> Acesso a <strong>950+ questões</strong> comentadas</li>
+      <li style="margin-bottom: 0.5em;"><i class="fa-regular fa-circle-check" style="color: #10b981; margin-right: 0.2em;"></i> Acesso a <strong>13456+ questões</strong> comentadas</li>
       <li style="margin-bottom: 0.5em; margin-top: 0.5em;"><i class="fa-regular fa-circle-check" style="color: #10b981; margin-right: 0.2em;"></i> Revisão inteligente com gráficos de desempenho</li>
       <li style="margin-bottom: 0.5em;"><i class="fa-regular fa-circle-check" style="color: #10b981; margin-right: 0.2em;"></i> Criação de <strong>simulados personalizados</strong></li>
       <li style="margin-bottom: 0.5em;"><i class="fa-regular fa-circle-check" style="color: #10b981; margin-right: 0.2em;"></i> Estatísticas detalhadas por matéria</li>
@@ -571,7 +560,7 @@ function goPremium() {
         },
         // opcionalmente, controle animações de show/hide se precisar de classes especiais:
         showClass: {
-            popup: '' // já tem nossa animação via CSS
+            popup: 'animate__animated animate__fadeIn' // já tem nossa animação via CSS
         },
         hideClass: {
             popup: 'animate__animated animate__fadeOut animate__faster' // ou use outra animação
@@ -600,12 +589,26 @@ function handleMenuItemClick(e) {
             irReiniciarSimulado();
             break;
         case 'fazerRevisao':
-            isPremium
-                    ? window.location.href = contextPath + "/revisao"
-                    : goPremium();
+            if (isLoggedIn) {
+                if (isPremium) {
+                    window.location.href = contextPath + "/revisao";
+                } else {
+                    goPremium();
+                }
+            } else {
+                criarFormularioLogin();
+            }
             break;
         case 'irEstatisticas':
-            window.location.href = contextPath + "/estatisticas";
+            if (isLoggedIn) {
+                if (isPremium) {
+                    window.location.href = contextPath + "/estatisticas";
+                } else {
+                    goPremium();
+                }
+            } else {
+                criarFormularioLogin();
+            }
             break;
         case 'toggleTheme':
             toggleTheme(); // <- sua função customizada
@@ -614,7 +617,7 @@ function handleMenuItemClick(e) {
             irRetomarSimulado();
             break;
         case 'criarSimulado':
-            window.location.href = contextPath + "/criarSimulado/criarSimulado.jsp"; // <- sua função customizada
+            window.location.href = contextPath + "/criarSimulado/simuladoLivre.jsp"; // <- sua função customizada
             break;
         case 'logout':
             fazerLogout();
@@ -631,7 +634,7 @@ function handleMenuItemClick(e) {
 
 function toggleTheme() {
     console.log("Clique detectado");
-    const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+    const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
     const newTheme = currentTheme === 'light' ? 'dark' : 'light';
     document.documentElement.setAttribute('data-theme', newTheme);
     localStorage.setItem('theme', newTheme);
@@ -640,7 +643,7 @@ function toggleTheme() {
 
 
 // Inicializa com o tema salvo
-const savedTheme = localStorage.getItem("theme") || "light";
+const savedTheme = localStorage.getItem("theme") || "dark";
 document.documentElement.setAttribute("data-theme", savedTheme);
 // setSVGIcon(savedTheme === "dark");
 

@@ -12,6 +12,7 @@ export function criarGraficoMaterias(estatisticas, chartInstance, resetarCanvas)
     document.querySelector('.metric-value.taxa').textContent = estatisticas.piorMateria;
     document.querySelector('.metric-label.top').textContent = "Melhor Mat\u00e9ria";
     document.querySelector('.metric-value.top').textContent = estatisticas.topMateria;
+
     if (!estatisticas || !estatisticas.rankingPorMateria) {
         console.warn("Dados de matérias não disponíveis.");
         return;

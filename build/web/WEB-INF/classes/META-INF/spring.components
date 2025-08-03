@@ -1,10 +1,13 @@
 config.DebugServlet=javax.servlet.annotation.WebServlet
 controller.FinalizarSimuladoServlet=javax.servlet.annotation.WebServlet
 controller.GetIdsQuestoesServlet=javax.servlet.annotation.WebServlet
+controller.GetIdsQuestoesSubMateriasServlet=javax.servlet.annotation.WebServlet
 controller.GetMateriaAtualServlet=javax.servlet.annotation.WebServlet
+controller.GetMateriasServlet=javax.servlet.annotation.WebServlet
 controller.GetQuestaoDevServlet=javax.servlet.annotation.WebServlet
 controller.GetQuestaoServlet=javax.servlet.annotation.WebServlet
 controller.GetRespostaServlet=javax.servlet.annotation.WebServlet
+controller.GetSubMateriasServlet=javax.servlet.annotation.WebServlet
 controller.IniciarSimuladoServlet=javax.servlet.annotation.WebServlet
 controller.OpcaoCorretaServlet=javax.servlet.annotation.WebServlet
 controller.QuestaoStatusServlet=javax.servlet.annotation.WebServlet

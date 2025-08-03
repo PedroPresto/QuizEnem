@@ -1,5 +1,7 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br" data-theme="dark">
     <head>
 
         <style>
@@ -43,8 +45,8 @@
                 </section>
 
                 <section class="subjects-container">
-                    <h2>MatÈrias</h2>
-                    <p class="section-desc">Selecione a quantidade de questıes para cada matÈria (0-20)</p>
+                    <h2>Mat√©rias</h2>
+                    <p class="section-desc">Selecione a quantidade de quest√µes para cada mat√©ria (0-20)</p>
 
                     <div id="subjectsList" class="subjects-list">
                         <!-- Subjects will be dynamically inserted here by JavaScript -->
@@ -57,7 +59,7 @@
                 <section class="summary-section">
                     <div class="test-summary">
                         <div class="summary-item">
-                            <span>Total de questıes</span>
+                            <span>Total de quest√µes</span>
                             <span id="totalQuestions">0</span>
                         </div>
                         <div class="summary-item">
@@ -75,12 +77,27 @@
         </div>
     </div>
 
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+// Adiciona a classe 'fade-in' assim que a p√°gina estiver pronta
+                document.body.classList.add('fade-in');
+            });
+        </script>
+
     <script src="js/store.js"></script>
+        <script>
+            // Configura o tipo de simulado para a p√°gina criarSimulado.jsp
+            document.addEventListener('DOMContentLoaded', () => {
+                store.setSimulationType('bySubjectAndYear');
+            });
+        </script>
     <script src="js/subjects.js"></script>
     <script src="js/yearSelector.js"></script>
     <script src="js/subjectCounter.js"></script>
     <script src="js/summary.js"></script>
     <script src="js/main.js"></script>
+
+
 
 </body>
 </html>

@@ -1,5 +1,5 @@
 let modoAtual = 'login'; // login ou cadastro
-import { getUserState, toggleLoginState } from '/Quiz-Enem/menu/userState.js';
+import {getUserState, toggleLoginState} from '/Quiz-Enem/menu/userState.js';
 
 // Configura o formulário para login ou cadastro
 function setupForm(modo) {
@@ -148,38 +148,38 @@ function setupAutenticacaoListeners() {
                 const resultado = await response.json();
 
                 if (resultado.status === "ok") {
-                    if (modoAtual === 'login') {
-                       
-                        const Toast = Swal.mixin({
-                            toast: true,
-                            position: 'top-end',
-                            showConfirmButton: false,
-                            timer: 2000,
-                            timerProgressBar: true,
-                            backdrop: false,
-                            showClass: {
-                                popup: 'animate__animated animate__fadeInRight animate__faster'
-                            },
-                            hideClass: {
-                                popup: 'animate__animated animate__fadeOutRight animate__faster'
-                            },
-                            didOpen: (toast) => {
-                                toast.onmouseenter = Swal.stopTimer;
-                                toast.onmouseleave = Swal.resumeTimer;
-                            }
-                        });
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 2000,
+                        timerProgressBar: true,
+                        backdrop: false,
+                        showClass: {
+                            popup: 'animate__animated animate__fadeInRight animate__faster'
+                        },
+                        hideClass: {
+                            popup: 'animate__animated animate__fadeOutRight animate__faster'
+                        },
+                        didOpen: (toast) => {
+                            toast.onmouseenter = Swal.stopTimer;
+                            toast.onmouseleave = Swal.resumeTimer;
+                        }
+                    });
 
+                    if (modoAtual === 'login') {
                         Toast.fire({
                             icon: "success",
                             title: "Logado com sucesso!"
                         });
-
-
-
-
                     } else if (modoAtual === 'cadastro') {
                         mostrarMensagem('success', 'Cadastro efetuado! Seja bem-vindo!');
+                        Toast.fire({
+                            icon: "success",
+                            title: "Logado com sucesso!"
+                        });
                     }
+
                     //salvar usuario na sessao.
                     localStorage.setItem("nome", resultado.nome);
                     localStorage.setItem("isadmin", resultado.isadmin);
@@ -193,15 +193,20 @@ function setupAutenticacaoListeners() {
                 } else {
                     mostrarMensagem('error', resultado.mensagem);
                 }
-            } else {
-                mostrarMensagem('error', 'Erro no servidor. Código: ' + response.status);
             }
-
-        } catch (erro) {
-            console.error("Erro de rede:", erro);
-            mostrarMensagem('error', 'Erro de rede ou servidor.');
+    else
+        {
+            mostrarMensagem('error', 'Erro no servidor. Código: ' + response.status);
         }
-    });
+
+    }
+catch
+    (erro)
+    {
+        console.error("Erro de rede:", erro);
+        mostrarMensagem('error', 'Erro de rede ou servidor.');
+    }
+});
 }
 
 

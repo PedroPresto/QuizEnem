@@ -4,7 +4,7 @@ export function criarGraficoResumo(estatisticas, chartInstance, resetarCanvas) {
         titulo.textContent = "Questões respondidas essa semana";
     }
 
-    const subbotoes = document.querySelectorAll('.sub');
+    const subbotoes = document.querySelectorAll('.secundario');
     
     subbotoes.forEach(botao => {
         botao.style.display = 'none';

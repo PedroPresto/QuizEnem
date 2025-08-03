@@ -3,11 +3,11 @@ export function criarGraficoAreas(estatisticas, chartInstance, resetarCanvas) {
     if (titulo) {
         titulo.textContent = "Sua porcentagem de acerto por áreas";
     }
-
+    //muda os subbotoes
     const subbotoes = document.querySelectorAll('.secundario');
     
     subbotoes.forEach(botao => {
-        botao.style.display = 'inherit';
+        botao.style.display = 'flex';
     });
 
     document.querySelector('.metric-label.questoes').textContent = "Mat\u00e9rias Realizadas";
