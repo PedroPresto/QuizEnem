@@ -1,8 +1,9 @@
 // autenticacao.js
 
 let modoAtual = 'login'; // login ou cadastro
-// CORREÇÃO: Removido o "/Quiz-Enem" do caminho para corresponder ao deploy como ROOT.war
-import { getUserState, updateMenuContent } from '/menu/userState.js';
+
+// CORREÇÃO: Usando o nome da função correto (toggleLoginState) e o caminho corrigido para o servidor.
+import { getUserState, toggleLoginState } from '/menu/userState.js';
 
 // Configura o formulário para login ou cadastro
 function setupForm(modo) {
@@ -57,7 +58,7 @@ function bindEvents() {
 // Exibe mensagens de erro ou sucesso
 function mostrarMensagem(tipo, texto) {
     const mensagem = document.getElementById('feedback');
-    const botaoSubmit = document.getElementById('botaoSubmit'); // Corrigido para usar o ID do botão
+    const botaoSubmit = document.getElementById('botaoSubmit');
 
     mensagem.className = `feedback ${tipo}`;
     mensagem.innerText = texto;
@@ -102,9 +103,6 @@ function setupAutenticacaoListeners() {
         }
     });
 
-    // =================================================================
-    // MUDANÇA PRINCIPAL AQUI: Event Delegation para o formulário
-    // =================================================================
     // Anexa o "escutador" ao corpo do documento para garantir que ele sempre funcione,
     // mesmo que o formulário seja carregado dinamicamente.
     document.body.addEventListener('submit', async function (event) {
@@ -156,18 +154,13 @@ function setupAutenticacaoListeners() {
                     localStorage.setItem("ispremium", resultado.ispremium);
 
                     const usuario = await getUserState();
-                    updateMenuContent(usuario);
 
-                    // =================================================================
+                    // CORREÇÃO: Chamando a função correta para atualizar o estado do menu.
+                    toggleLoginState(usuario);
+
                     // SUGESTÃO: Fechar o modal de login após o sucesso
-                    // =================================================================
                     // Encontre o seu modal pelo ID e use o método para escondê-lo.
-                    // Exemplo (se usar Bootstrap):
-                    // const modalElement = document.getElementById('seuModalDeLogin');
-                    // const modalInstance = bootstrap.Modal.getInstance(modalElement);
-                    // if (modalInstance) modalInstance.hide();
-                    // Ou, sem framework:
-                    // document.getElementById('seuModalDeLogin').style.display = 'none';
+                    // Exemplo: document.getElementById('seuModalDeLogin').style.display = 'none';
 
                 } else {
                     mostrarMensagem('error', resultado.mensagem);
