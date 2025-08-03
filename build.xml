@@ -1,14 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="Quiz-Enem" default="default" basedir=".">
-    <description>Builds, tests, and runs the project Quiz-Enem.</description>
-    <import file="nbproject/build-impl.xml"/>
+<project name="Quiz-Enem" default="dist" basedir=".">
+    <description>Build script para o projeto Quiz Enem, independente de IDE.</description>
 
-    <target name="-pre-dist">
-        <echo message="Copiando bibliotecas (.jar) para a pasta de build..."/>
-        <mkdir dir="${build.web.dir}/WEB-INF/lib"/>
-        <copy todir="${build.web.dir}/WEB-INF/lib">
-            <fileset dir="lib" includes="**/*.jar"/>
-        </copy>
+    <property name="app.name" value="Quiz-Enem"/>
+    <property name="src.dir" value="src/java"/>
+    <property name="web.dir" value="web"/>
+    <property name="lib.dir" value="lib"/>
+    <property name="build.dir" value="build"/>
+    <property name="dist.dir" value="dist"/>
+    <property name="build.classes.dir" value="${build.dir}/classes"/>
+
+    <path id="compile.classpath">
+        <fileset dir="${lib.dir}" includes="**/*.jar"/>
+        <fileset dir="${web.dir}/WEB-INF/lib" includes="**/*.jar" erroronmissingdir="false"/>
+    </path>
+
+    <target name="clean" description="Limpa as pastas de build e dist">
+        <delete dir="${build.dir}"/>
+        <delete dir="${dist.dir}"/>
+    </target>
+
+    <target name="init" depends="clean" description="Cria as pastas de build">
+        <mkdir dir="${build.dir}"/>
+        <mkdir dir="${build.classes.dir}"/>
+        <mkdir dir="${dist.dir}"/>
+    </target>
+
+    <target name="compile" depends="init" description="Compila o código fonte">
+        <javac srcdir="${src.dir}" destdir="${build.classes.dir}" classpathref="compile.classpath" includeantruntime="false"/>
+    </target>
+
+    <target name="dist" depends="compile" description="Gera o arquivo WAR para deploy">
+        <war destfile="${dist.dir}/${app.name}.war" webxml="${web.dir}/WEB-INF/web.xml">
+            <fileset dir="${web.dir}"/>
+            <classes dir="${build.classes.dir}"/>
+            <lib dir="${lib.dir}"/>
+        </war>
     </target>
 
 </project>
