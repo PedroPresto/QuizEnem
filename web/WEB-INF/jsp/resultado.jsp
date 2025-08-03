@@ -3,6 +3,7 @@
     <head>
 
         <title>Resultado do Simulado</title>
+        <meta name="theme-color" content="#0F172A">
         <%@ include file="/includes/head.jsp"%>
         <link rel="stylesheet" href="resultadoSimulado/resultado.css" />
         <script type="module" src="resultadoSimulado/resultadoSimulado.js"></script>
