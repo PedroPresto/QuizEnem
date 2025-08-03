@@ -153,10 +153,12 @@ function setupAutenticacaoListeners() {
                     localStorage.setItem("isadmin", resultado.isadmin);
                     localStorage.setItem("ispremium", resultado.ispremium);
 
-                    const usuario = await getUserState();
-
-                    // CORREÇÃO: Chamando a função correta para atualizar o estado do menu.
-                    toggleLoginState(usuario);
+                    // =================================================================
+                    // OTIMIZAÇÃO: Passamos o objeto 'resultado' que acabamos de receber
+                    // diretamente para a função que atualiza o menu.
+                    // Isso é mais direto e evita possíveis problemas de timing.
+                    // =================================================================
+                    toggleLoginState(resultado);
 
                     // SUGESTÃO: Fechar o modal de login após o sucesso
                     // Encontre o seu modal pelo ID e use o método para escondê-lo.
