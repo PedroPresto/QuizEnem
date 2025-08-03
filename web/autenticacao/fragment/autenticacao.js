@@ -158,7 +158,7 @@ function setupAutenticacaoListeners() {
                     // diretamente para a função que atualiza o menu.
                     // Isso é mais direto e evita possíveis problemas de timing.
                     // =================================================================
-                    toggleLoginState(resultado);
+                    updateMenuContent(usuario);
 
                     // SUGESTÃO: Fechar o modal de login após o sucesso
                     // Encontre o seu modal pelo ID e use o método para escondê-lo.
