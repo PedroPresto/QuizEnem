@@ -2,6 +2,7 @@
 <project name="Quiz-Enem" default="dist" basedir=".">
     <description>Build script para o projeto Quiz Enem, independente de IDE.</description>
 
+    <!-- Propriedades do projeto -->
     <property name="app.name" value="Quiz-Enem"/>
     <property name="src.dir" value="src/java"/>
     <property name="web.dir" value="web"/>
@@ -10,24 +11,35 @@
     <property name="dist.dir" value="dist"/>
     <property name="build.classes.dir" value="${build.dir}/classes"/>
 
+    <!-- Classpath para compilação, incluindo todas as bibliotecas na pasta lib -->
     <path id="compile.classpath">
         <fileset dir="${lib.dir}" includes="**/*.jar"/>
     </path>
 
+    <!-- Tarefa para limpar os diretórios de build e distribuição -->
     <target name="clean" description="Limpa as pastas de build e dist">
         <delete dir="${build.dir}"/>
         <delete dir="${dist.dir}"/>
     </target>
 
+    <!-- Tarefa para criar os diretórios necessários para o build -->
     <target name="init" depends="clean" description="Cria as pastas de build">
         <mkdir dir="${build.classes.dir}"/>
         <mkdir dir="${dist.dir}"/>
     </target>
 
-    <target name="compile" depends="init" description="Compila o código fonte">
+    <!-- Tarefa para compilar o código fonte Java -->
+    <target name="compile" depends="init" description="Compila o código fonte e copia os recursos">
+        <!-- Compila os arquivos .java -->
         <javac srcdir="${src.dir}" destdir="${build.classes.dir}" classpathref="compile.classpath" includeantruntime="false"/>
+
+        <!-- Copia arquivos de recursos (como log4j.properties) para a pasta de classes -->
+        <copy todir="${build.classes.dir}">
+            <fileset dir="${src.dir}" excludes="**/*.java"/>
+        </copy>
     </target>
 
+    <!-- Tarefa para gerar o arquivo WAR final para deploy -->
     <target name="dist" depends="compile" description="Gera o arquivo WAR para deploy">
         <war destfile="${dist.dir}/${app.name}.war" webxml="${web.dir}/WEB-INF/web.xml">
             <fileset dir="${web.dir}"/>
