@@ -41,7 +41,7 @@ services:
     networks:
       - quiz-net
 
-  # NOVO: Serviço do Nginx (Reverse Proxy)
+  # Serviço do Nginx (Reverse Proxy)
   nginx:
     image: nginx:latest
     container_name: quiz-enem-nginx
@@ -50,6 +50,7 @@ services:
       - "80:80"   # Expõe a porta HTTP
       - "443:443" # Expõe a porta HTTPS
     volumes:
+      # CORREÇÃO: Monta o arquivo default.conf no diretório correto conf.d
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
       - ./certbot/www:/var/www/certbot/
       - ./certbot/conf/:/etc/letsencrypt/
@@ -58,7 +59,7 @@ services:
     networks:
       - quiz-net
 
-  # NOVO: Serviço do Certbot para certificados SSL
+  # Serviço do Certbot para certificados SSL
   certbot:
     image: certbot/certbot
     container_name: quiz-enem-certbot
