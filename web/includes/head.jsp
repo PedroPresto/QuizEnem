@@ -42,3 +42,13 @@
 
 <!-- 9. ? M�dulo do menu (moderno, executa depois automaticamente) -->
 <script type="module" src="${pageContext.request.contextPath}/menu/createMenu.js"></script>
+
+<!-- 10. Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-6YXBB4VP4T"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-6YXBB4VP4T');
+</script>
