@@ -13,6 +13,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<%-- Link para o ícone padrão .ico --%>
+<link rel="icon" href="${pageContext.request.contextPath}/favicon.ico" sizes="any">
+<%-- Link para um ícone SVG (moderno e escalável) --%>
+<link rel="icon" href="${pageContext.request.contextPath}/favicon.svg" type="image/svg+xml">
+<%-- Link para o ícone da Apple (usado no iOS) --%>
+<link rel="apple-touch-icon" href="${pageContext.request.contextPath}/favicon.png">
+
+
 <!-- 3. ? Pr�-conex�o para fontes (reduz o tempo de DNS/TLS) -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
