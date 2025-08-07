@@ -104,7 +104,7 @@ public class UsuarioDAO {
 
     //Insere usuário vindo do login via Google
     public void insertGoogle(Usuario usuario) throws SQLException {
-        String sql = "INSERT INTO usuarios (nome, email, google_id) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO usuarios (nome, email, google_id) VALUES (?, ?, ?)";
         try (Connection conn = DBConnection.getConnection(); PreparedStatement st = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             st.setString(1, usuario.getNome());
             st.setString(2, usuario.getEmail());
