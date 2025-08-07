@@ -92,9 +92,10 @@ async function updateMenuContent(usuario) {
     isLoggedIn = usuario.isLoggedIn
     isAdmin = usuario.isAdmin;
 
-    console.log("usuario menu2:", usuario);
-    console.log("Tipo de usuário:", typeof usuario);
-    console.log("Campos:", usuario?.nome, usuario?.id, usuario?.isLoggedIn);
+      // console.log("usuario menu2:", usuario);
+     // console.log("Tipo de usuário:", typeof usuario);
+    // console.log("Campos:", usuario?.nome, usuario?.id, usuario?.isLoggedIn);
+
     menu.innerHTML = ` 
    <div class="menu-header"> 
       <span class="menu-title">Menu</span>
@@ -107,9 +108,9 @@ async function updateMenuContent(usuario) {
   <div class="avatar-container">
     <div class="avatar">
       ${usuario.isLoggedIn && usuario.foto
-        ? `<img src="${usuario.foto}" alt="Avatar" class="avatar-img">`
+        ? `<img src="${contextPath}/${usuario.foto}" alt="Avatar" class="avatar-img">`
         : (usuario.isLoggedIn && usuario.iniciais
-            ? usuario.iniciais
+            ? `<img src="https://placehold.co/160x160/333333/FFFFFF?text=${usuario.iniciais}&font=lato" alt="Avatar" class="avatar-img">`
             : '?')}
     </div>
   </div>
@@ -129,7 +130,7 @@ async function updateMenuContent(usuario) {
   </div>
 </div>
 </div>
-    </div>
+  
 
     <div class="menu-section actions-section"> <!-- SEÇÃO PÁGINA INICIAL -->
       <div class="section-title">${isIndexPage || isStatisticsPage ? 'Página Inicial' : 'Simulado'}</div>
@@ -166,7 +167,7 @@ async function updateMenuContent(usuario) {
     ` : ''}
           <li><a href="#logout" class="menu-item" data-action="criarSimulado"><i class="fa-solid fa-pen-to-square icon"></i> Criar Simulado</a></li>  
           <li><a href="#logout" class="menu-item"><i class="fa-solid fa-user-group icon"></i> Quiz Multiplayer</a></li>
-         ${usuario.isAdmin ? ` <li><a href="adminReview" class="menu-item" data-action="irAdminReview"><i class="fa-solid fa-user-group icon"></i> Admin Review</a></li> ` : '' }
+         ${usuario.isAdmin ? ` <li><a href="adminReview" class="menu-item" data-action="irAdminReview"><i class="fa-solid fa-user-group icon"></i> Admin Review</a></li> ` : ''}
         </ul>
       </div>
     ` : ''}
@@ -176,7 +177,7 @@ async function updateMenuContent(usuario) {
       <div class="menu-section rodape"> 
         <div class="section-title">Perfil</div>
         <ul class="menu-list">
-          <li><a href="#logout" class="menu-item"><i class="fa-solid fa-user icon"></i> Meu Perfil</a></li>
+          <li><a href="#logout" class="menu-item" data-action="perfil"><i class="fa-solid fa-user icon"></i> Meu Perfil</a></li>
           <li><a href="#logout" class="menu-item" data-action="logout"><i class="fas fa-right-from-bracket icon"></i> Sair</a></li>
 
         </ul>
@@ -213,28 +214,6 @@ async function updateMenuContent(usuario) {
     }
 
 
-    //const actionButton = menu.querySelector('.premium-btn, .login-btn');
-    if (actionButton) {
-        actionButton.addEventListener('click', () => {
-            if (usuario.isLoggedIn) {
-                fetch("CriarSessaoCheckout", {
-                    method: "POST"
-                })
-                    .then(response => response.text())
-                    .then(url => {
-                        if (url.startsWith("http")) {
-                            window.location.href = url;
-                        } else {
-                            console.error("URL inválida:", url);
-                        }
-                    })
-                    .catch(err => console.error("Erro:", err));
-            } else {
-                //window.location.href = contextPath + "/autenticacao/login.jsp";
-            }
-
-        });
-    }
 }
 
 export function criarFormularioLogin() {
@@ -618,6 +597,9 @@ function handleMenuItemClick(e) {
             break;
         case 'criarSimulado':
             window.location.href = contextPath + "/criarSimulado/simuladoLivre.jsp"; // <- sua função customizada
+            break;
+        case 'perfil':
+            window.location.href = contextPath + "/perfil.jsp"; // <- sua função customizada
             break;
         case 'logout':
             fazerLogout();

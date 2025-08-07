@@ -1,0 +1,450 @@
+:root {
+    --primary-700: rgb(41 57 93);
+    --primary-800: rgb(28 39 63);
+    --primary-900: rgb(16 23 40);
+    --emerald-400: #34d399;
+    --emerald-500: #10b981;
+    --emerald-600: #059669;
+    --orange-400: #fb923c;
+    --red-400: #f87171;
+    --gray-300: #d1d5db;
+    --gray-400: #9ca3af;
+    --gray-500: #6b7281;
+    --white: #ffffff;
+    --black: #000000;
+}
+
+/* Reset e Estilos Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    overflow: hidden; /* Impede qualquer rolagem no nível da página */
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: var(--white);
+    background-color: var(--primary-900);
+}
+
+/* Contêiner para os gradientes de fundo */
+.background-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden; /* Garante que os gradientes não causem rolagem */
+    z-index: 0;
+}
+
+/* Contêiner principal para o conteúdo com rolagem própria */
+.page-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Alinha no topo para rolagem */
+    padding: 2rem 1rem; /* Adiciona mais espaço no topo e embaixo */
+    z-index: 1;
+    overflow-y: auto; /* Permite a rolagem apenas no wrapper */
+}
+
+/* Animações */
+@keyframes pulse {
+    50% {
+        opacity: .5;
+    }
+}
+
+@keyframes slide-up {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Elementos de fundo decorativos */
+.background-gradient {
+    position: absolute;
+    border-radius: 9999px;
+    filter: blur(6rem);
+    animation: pulse 8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.gradient-1 {
+    top: -25%;
+    left: -25%;
+    width: 50%;
+    height: 50%;
+    background-image: linear-gradient(to bottom right, rgba(16, 185, 129, 0.2), var(--primary-900));
+}
+
+.gradient-2 {
+    bottom: -25%;
+    right: -25%;
+    width: 50%;
+    height: 50%;
+    background-image: linear-gradient(to top left, rgba(249, 115, 22, 0.2), var(--primary-900));
+    animation-delay: 1s;
+}
+
+/* Card Principal */
+.profile-card {
+    width: 100%;
+    max-width: 56rem; /* max-w-4xl */
+    display: grid;
+    gap: 2rem;
+    background-color: rgba(16, 23, 40, 0.7);
+    backdrop-filter: blur(16px);
+    border-radius: 1rem; /* rounded-2xl */
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    padding: 2rem; /* p-8 */
+    border: 1px solid rgba(41, 57, 93, 0.5);
+    animation: slide-up 0.7s ease-out forwards;
+    margin: auto 0; /* Centraliza verticalmente se o conteúdo for menor que a tela */
+}
+
+@media (min-width: 1024px) {
+    .profile-card {
+        grid-template-columns: repeat(3, 1fr);
+        margin: auto; /* Centraliza o card em telas maiores */
+    }
+    .page-wrapper {
+        align-items: center; /* Centraliza no desktop */
+    }
+}
+
+/* Coluna da Esquerda: Perfil */
+.profile-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+@media (min-width: 1024px) {
+    .profile-info {
+        grid-column: span 1 / span 1;
+        border-right: 2px solid rgba(41, 57, 93, 0.5);
+        padding-right: 2rem;
+    }
+}
+
+.profile-pic-container {
+    position: relative;
+    margin-bottom: 1rem;
+    cursor: pointer;
+}
+
+.profile-pic-container:hover .profile-pic {
+    filter: brightness(0.75);
+}
+
+.profile-pic-container:hover .camera-overlay {
+    opacity: 1;
+}
+
+.profile-pic {
+    width: 10rem; /* w-40 */
+    height: 10rem; /* h-40 */
+    border-radius: 9999px;
+    object-fit: cover;
+    border: 4px solid var(--primary-700);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.pulsing-border {
+    position: absolute;
+    inset: 0;
+    border-radius: 9999px;
+    border: 2px solid var(--emerald-500);
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.profile-pic-container:hover .pulsing-border {
+    animation: none;
+}
+
+.camera-overlay {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: 4rem; /* w-16 */
+    height: 4rem; /* h-16 */
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 9999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.profile-info h1 {
+    font-size: 1.875rem; /* text-3xl */
+    font-weight: 700;
+    color: var(--white);
+}
+
+.profile-info .email {
+    color: var(--gray-400);
+    margin-bottom: 1.5rem;
+}
+
+.profile-info .description {
+    font-size: 1rem; /* text-sm */
+    color: var(--gray-300);
+    line-height: 1.625;
+}
+
+/* Coluna da Direita: Formulário */
+.profile-form-container {
+    grid-column: span 1 / span 1;
+}
+@media (min-width: 1024px) {
+    .profile-form-container {
+        grid-column: span 2 / span 2;
+    }
+}
+
+.profile-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-section h3 {
+    font-size: 1.5rem; /* text-lg */
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+}
+.form-section .personal-data-title { color: var(--emerald-400); }
+.form-section .change-password-title { color: var(--orange-400); }
+
+.form-section .fields-group {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.input-field {
+    position: relative;
+}
+
+.input-field .icon {
+    position: absolute;
+    top: 50%;
+    left: 1rem;
+    transform: translateY(-50%);
+    color: var(--gray-400);
+    pointer-events: none;
+    z-index: 10;
+}
+
+.input-field input {
+    width: 100%;
+    padding: 0.75rem 1rem 0.75rem 3rem; /* py-3 pl-12 pr-4 */
+    background-color: rgba(28, 39, 63, 0.5);
+    border: 1px solid var(--primary-700);
+    border-radius: 0.5rem; /* rounded-lg */
+    color: var(--white);
+    transition: all 0.3s ease;
+    font-size: 1rem;
+}
+
+.input-field input::placeholder {
+    color: var(--gray-500);
+}
+
+.input-field input:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--emerald-500);
+}
+
+.input-field input:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.password-field input {
+    padding-right: 3rem; /* pr-12 */
+}
+
+.password-toggle {
+    position: absolute;
+    top: 50%;
+    right: 1rem;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--gray-400);
+    transition: color 0.3s ease;
+    z-index: 10;
+}
+
+.password-toggle:hover {
+    color: var(--emerald-500);
+}
+
+/* Mensagem de Feedback */
+#message-box {
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    text-align: center;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: none; /* Oculto por padrão */
+}
+
+#message-box.success {
+    background-color: rgba(16, 185, 129, 0.2);
+    color: var(--emerald-400);
+    display: block;
+}
+
+#message-box.error {
+    background-color: rgba(239, 68, 68, 0.2);
+    color: var(--red-400);
+    display: block;
+}
+
+/* Botão de Salvar */
+.submit-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--emerald-500);
+    color: var(--white);
+    font-weight: 700;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-size: 1.125rem;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.submit-btn:hover {
+    background-color: var(--emerald-600);
+    transform: scale(1.05);
+    box-shadow: 0 10px 15px -3px rgba(16, 185, 129, 0.3), 0 4px 6px -2px rgba(16, 185, 129, 0.2);
+}
+
+.submit-btn .icon {
+    margin-right: 0.5rem;
+    margin-left: -0.5rem;
+    transition: transform 0.3s ease;
+}
+
+.submit-btn:hover .icon {
+    transform: rotate(12deg);
+}
+
+/* Estilos para o Modal de Edição (Cropper) */
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+/* Conteúdo do modal */
+.modal-content {
+    background-color: #2c2c2c;
+    padding: 20px; /* AJUSTE AQUI: Diminuído de 25px para 20px para reduzir o espaço */
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    width: 90%;
+    max-width: 450px;
+    color: #fff;
+    text-align: center;
+}
+
+.modal-content h2 {
+    margin-top: 0;
+    margin-bottom: 15px; /* AJUSTE AQUI: Levemente reduzido */
+}
+
+/* Contêiner da imagem onde o cropper será inicializado */
+.img-container {
+    width: 100%;
+    height: 350px;
+    margin-bottom: 20px;
+}
+
+.img-container > img {
+    max-width: 100%;
+}
+
+/* Máscara Circular e Vinheta */
+.cropper-view-box {
+    border-radius: 50%;
+    outline: 3px solid rgba(255, 255, 255, 0.7);
+    outline-color: rgba(255, 255, 255, 0.7);
+    box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.6);
+}
+
+.cropper-face {
+    background-color: transparent !important;
+    opacity: 0 !important;
+}
+
+.cropper-canvas, .cropper-drag-box {
+    cursor: move;
+}
+
+
+/* --- Botões do Modal --- */
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+}
+
+.modal-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.confirm-btn {
+    /* AJUSTE AQUI: Cor alterada para Verde Esmeralda */
+    background-color: #10b981; /* Verde Esmeralda (Tailwind emerald-500) */
+    color: white;
+}
+.confirm-btn:hover {
+    /* AJUSTE AQUI: Cor do hover para um verde mais escuro */
+    background-color: #059669; /* Verde Esmeralda mais escuro (Tailwind emerald-600) */
+}
+
+.cancel-btn {
+    background-color: #555;
+    color: white;
+}
+.cancel-btn:hover {
+    background-color: #777;
+}

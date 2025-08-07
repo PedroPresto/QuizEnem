@@ -62,7 +62,7 @@ public class UsuarioDAO {
                 usuario.setId(rs.getInt("id"));
                 usuario.setNome(rs.getString("nome"));
                 usuario.setEmail(rs.getString("email"));
-                //usuario.setSenha(rs.getString("senha"));
+                usuario.setFoto(rs.getString("foto"));
                 usuario.setIsAdmin(rs.getBoolean("isadmin"));
                 usuario.setIsPremium(rs.getBoolean("ispremium"));
                 usuario.setDataCadastro(rs.getString("data_cadastro"));
@@ -104,12 +104,11 @@ public class UsuarioDAO {
 
     //Insere usuário vindo do login via Google
     public void insertGoogle(Usuario usuario) throws SQLException {
-        String sql = "INSERT INTO usuarios (nome, email, google_id, foto) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO usuarios (nome, email, google_id) VALUES (?, ?, ?, ?)";
         try (Connection conn = DBConnection.getConnection(); PreparedStatement st = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             st.setString(1, usuario.getNome());
             st.setString(2, usuario.getEmail());
             st.setString(3, usuario.getGoogleId());
-            st.setString(4, usuario.getFoto());
             st.executeUpdate();
             try (ResultSet keys = st.getGeneratedKeys()) {
                 if (keys.next()) {
@@ -121,13 +120,11 @@ public class UsuarioDAO {
 
     //Atualiza usuário existente com dados do Google
     public void updateGoogle(Usuario usuario) throws SQLException {
-        String sql = "UPDATE usuarios SET nome = ?, email = ?, foto = ?, google_id = ? WHERE id = ?";
+        String sql = "UPDATE usuarios SET nome = ?, google_id = ? WHERE id = ?";
         try (Connection conn = DBConnection.getConnection(); PreparedStatement st = conn.prepareStatement(sql)) {
             st.setString(1, usuario.getNome());
-            st.setString(2, usuario.getEmail());
-            st.setString(3, usuario.getFoto());
-            st.setString(4, usuario.getGoogleId());
-            st.setInt(5, usuario.getId());
+            st.setString(2, usuario.getGoogleId());
+            st.setInt(3, usuario.getId());
             st.executeUpdate();
         }
     }
@@ -145,4 +142,49 @@ public class UsuarioDAO {
         usuario.setGoogleId(rs.getString("google_id"));
         return usuario;
     }
+
+    public boolean atualizar(Usuario usuario) throws SQLException {
+        boolean atualizarSenha = usuario.getSenha() != null && !usuario.getSenha().isEmpty();
+
+        String sql;
+        if (atualizarSenha) {
+            sql = "UPDATE usuarios SET nome = ?, senha = ?, foto = ? WHERE id = ?";
+        } else {
+            sql = "UPDATE usuarios SET nome = ?, foto = ? WHERE id = ?";
+        }
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement st = conn.prepareStatement(sql)) {
+
+            st.setString(1, usuario.getNome());
+
+            if (atualizarSenha) {
+                st.setString(2, usuario.getSenha());
+                st.setString(3, usuario.getFoto());
+                st.setInt(4, usuario.getId());
+            } else {
+                st.setString(2, usuario.getFoto());
+                st.setInt(3, usuario.getId());
+            }
+
+            int linhasAfetadas = st.executeUpdate();
+            return linhasAfetadas > 0;
+        }
+    }
+
+    public boolean atualizarFoto(int usuarioId, String caminhoFoto) throws SQLException {
+        String sql = "UPDATE usuarios SET foto = ? WHERE id = ?";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement st = conn.prepareStatement(sql)) {
+
+            st.setString(1, caminhoFoto);
+            st.setInt(2, usuarioId);
+
+            int linhasAfetadas = st.executeUpdate();
+            return linhasAfetadas > 0;
+        }
+    }
+
+
 }

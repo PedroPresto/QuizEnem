@@ -61,7 +61,7 @@
 <!-- 6. ? Seus estilos locais (com prioridade por virem depois) -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/menu/menu.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/loader.css">
-
+<link rel="stylesheet" href="${pageContext.request.contextPath}/autenticacao/fragment/login.css">
 
 
 <!-- 7. ? Vari�veis JS globais (depois dos estilos serem aplicados) -->

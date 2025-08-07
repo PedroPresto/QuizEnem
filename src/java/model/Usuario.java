@@ -8,6 +8,7 @@ public class Usuario implements Serializable {
     private int id;
     private String googleId;
     private String nome;
+    private String iniciais;
     private String email;
     private String senha;
     private String dataCadastro; // Pode ser String ou Timestamp, dependendo do que preferir
@@ -50,6 +51,14 @@ public class Usuario implements Serializable {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public String getIniciais() {
+        return iniciais;
+    }
+
+    public void setIniciais(String iniciais) {
+        this.iniciais = iniciais;
     }
 
     public String getEmail() {

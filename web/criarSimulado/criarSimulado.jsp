@@ -29,17 +29,16 @@
                 <section class="year-selector">
                     <h2>Ano da Prova</h2>
                     <div class="slider-container">
-                        <input type="range" min="2019" max="2024" value="2024" class="slider" id="yearSlider">
+                        <input type="range" min="2019" max="2023" value="2023" class="slider" id="yearSlider">
                         <div class="slider-labels">
                             <span>2019</span>
                             <span>2020</span>
                             <span>2021</span>
                             <span>2022</span>
                             <span>2023</span>
-                            <span>2024</span>
                         </div>
                         <div class="year-display">
-                            <span id="selectedYear">2024</span>
+                            <span id="selectedYear">2023</span>
                         </div>
                     </div>
                 </section>

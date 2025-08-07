@@ -28,7 +28,8 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="m9 12 2 2 4-4"/></svg>
                     <h1>Quiz Enem</h1>
                 </div>
-                <p class="subtitle">Teste seus conhecimentos para o Enem com questões e simulados da banca Cebraspe</p>
+                <p class="subtitle">Estude com +13.000 questões comentadas, análises inteligentes e foco total na sua aprovação no Enem.
+                </p>
             </header>
 
 
@@ -45,7 +46,7 @@
                                 <p>Resolva questões oficiais do Enem com comentários explicativos.</p>
                                 <div class="exam-stats">
                                     <span>11.3k estudantes</span>
-                                    <span>4320 questões</span>
+                                    <span>1.260 questões</span>
                                 </div>
                                 <button class="btn btn-primary" id="provasAnteriores" type="button">Começar agora</button>
                             </div>
@@ -59,7 +60,7 @@
                                 <p>Questões exclusivas com comentários feitos por especialistas</p>
                                 <div class="exam-stats">
                                     <span>12.1k estudantes</span>
-                                    <span>5469 questões</span>
+                                    <span>12.364 questões</span>
                                 </div>
                                 <button class="btn btn-primary" id="dev-card" type="button">Começar Agora</button>
                             </div>
@@ -75,13 +76,13 @@
                         <div class="subject-card" id="cardLinguagens">
                             <i class="fa-solid fa-spell-check"></i>
                             <h3>Português</h3>
-                            <span>248 questões</span>
+                            <span>531 questões</span>
                         </div>
 
                         <div class="subject-card"  id="cardMatematica">
                             <i class="fa-solid fa-square-root-variable"></i>
                             <h3>Matemática</h3>
-                            <span>312 questões</span>
+                            <span>453 questões</span>
                         </div>
 
                         <div class="subject-card" id="cardGeografia">
@@ -93,7 +94,7 @@
                         <div class="subject-card" id="cardHistoria">
                             <i class="fa-solid fa-calendar-check"></i>
                             <h3>História</h3>
-                            <span>224 questões</span>
+                            <span>294 questões</span>
                         </div>
 
 
@@ -101,25 +102,25 @@
                         <div class="subject-card" id="cardFisica">
                             <i class="fa-solid fa-apple-whole"></i>
                             <h3>Fisica</h3>
-                            <span>224 questões</span>
+                            <span>215 questões</span>
                         </div>
 
                         <div class="subject-card" id="cardQuimica">
                             <i class="fa-solid fa-vial-circle-check"></i>
                             <h3>Quimica</h3>
-                            <span>224 questões</span>
+                            <span>238 questões</span>
                         </div>
 
                         <div class="subject-card" id="cardBiologia">
                             <i class="fa-solid fa-dna"></i>
                             <h3>Biologia</h3>
-                            <span>156 questões</span>
+                            <span>227 questões</span>
                         </div>
 
                         <div class="subject-card" id="cardFilosofia">
                             <i class="fa-solid fa-landmark"></i>
                             <h3>Filosofia</h3>
-                            <span>224 questões</span>
+                            <span>194 questões</span>
                         </div>
 
                         <div class="subject-card" id="cardSociologia">
@@ -137,31 +138,31 @@
                         <div class="subject-card" id="cardEspanhol">
                             <i class="fa-solid fa-pepper-hot"></i>
                             <h3>Espanhol</h3>
-                            <span>75 questões</span>
+                            <span>145 questões</span>
                         </div>
 
                         <div class="subject-card" id="cardLiteratura">
                             <i class="fa-solid fa-quote-left"></i>
                             <h3>Literatura</h3>
-                            <span>75 questões</span>
+                            <span>113 questões</span>
                         </div>
 
                         <div class="subject-card" id="cardArtes">
                             <i class="fa-solid fa-signature"></i>
                             <h3>Artes</h3>
-                            <span>75 questões</span>
+                            <span>203 questões</span>
                         </div>
 
                         <div class="subject-card" id="cardTI">
                             <i class="fa-solid fa-computer"></i>
                             <h3>T.I</h3>
-                            <span>75 questões</span>
+                            <span>120 questões</span>
                         </div>
 
                         <div class="subject-card" id="cardEF">
                             <i class="fa-solid fa-dumbbell"></i>
                             <h3>Ed. Física</h3>
-                            <span>75 questões</span>
+                            <span>104 questões</span>
                         </div>
 
                     </div>
