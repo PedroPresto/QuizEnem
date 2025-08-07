@@ -8,6 +8,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
+import java.util.ArrayList;
 
 public class UsuarioDAO {
 
@@ -186,5 +188,36 @@ public class UsuarioDAO {
         }
     }
 
+    public List<Usuario> listarTodos() {
+        List<Usuario> usuarios = new ArrayList<>();
+        String sql = "SELECT id, nome, email, data_cadastro FROM usuarios ORDER BY id ASC";
 
+        // Usamos try-with-resources para garantir que a conexão e outros recursos sejam fechados
+        try (Connection connection = DBConnection.getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
+            // Itera sobre cada linha do resultado da consulta
+            while (rs.next()) {
+                Usuario usuario = new Usuario();
+
+                // Mapeia cada coluna para uma propriedade do objeto Usuario
+                usuario.setId(rs.getInt("id"));
+                usuario.setNome(rs.getString("nome"));
+                usuario.setEmail(rs.getString("email"));
+
+                // Pega o Timestamp do banco e converte para LocalDateTime
+                usuario.setDataCadastro(rs.getString("data_cadastro"));
+
+                // Adiciona o objeto preenchido à lista
+                usuarios.add(usuario);
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Erro ao listar usuários: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        return usuarios;
+    }
 }
