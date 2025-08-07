@@ -88,7 +88,7 @@ public class UsuarioDAO {
         return null;
     }
 
-    //Busca usuário pelo googleId (autenticação via Google)a
+    //Busca usuário pelo googleId (autenticação via Google)
     public Usuario findByGoogleId(String googleId) throws SQLException {
         String sql = "SELECT * FROM usuarios WHERE google_id = ?";
         try (Connection conn = DBConnection.getConnection(); PreparedStatement st = conn.prepareStatement(sql)) {
