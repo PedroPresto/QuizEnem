@@ -3,37 +3,6 @@ import {criarFormularioLogin} from './menu/menu.js';
 
 document.addEventListener("DOMContentLoaded", function () {
 
-    // Objeto com todas as imagens dos cards (com as novas adições)
-    const cardImages = {
-      //  "cardProvasAnteriores": "assets/anteriores.webp",
-      //  "cardCriarSimulado": "assets/criarSimulado.webp",
-        "cardLinguagens": "assets/linguagens.webp",
-        "cardMatematica": "assets/matematica.webp",
-        "cardFisica": "assets/fisica.webp",
-        "cardQuimica": "assets/quimica.webp",
-        "cardBiologia": "assets/biologia.webp",
-        "cardGeografia": "assets/geografia.webp",
-        "cardHistoria": "assets/historia.webp",
-        "cardSociologia": "assets/sociologia.webp",
-        "cardFilosofia": "assets/filosofia.webp",
-        "cardIngles": "assets/ingles.webp",
-        "cardEspanhol": "assets/espanhol.webp",
-        "cardLiteratura": "assets/literatura.webp", // <- Corrigido
-        "cardArtes": "assets/artes.webp",         // <- Corrigido
-        "cardTI": "assets/TI.webp",                // <- Corrigido
-        "cardEF": "assets/EF.webp"                // <- Corrigido
-    };
-
-    // Loop para aplicar as imagens de fundo
-    for (const cardId in cardImages) {
-        const cardElement = document.getElementById(cardId);
-        if (cardElement) {
-            const imagePath = cardImages[cardId];
-            cardElement.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('${contextPath}/${imagePath}')`;
-        }
-    }
-
-    // --- O RESTANTE DO SEU CÓDIGO (JÁ ESTÁ CORRETO) ---
 
     // Função para os cards principais
     selecionarQuestoes("provasAnteriores");
