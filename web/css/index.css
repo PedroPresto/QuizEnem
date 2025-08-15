@@ -490,9 +490,3 @@ section h2::after {
 #cardEF {
     background-image: url('../assets/EF.webp');
 }
-
-/* Adiciona o gradiente a todos os cards de matéria de uma vez */
-.subject-card {
-    background-color: rgba(0, 0, 0, 0.4); /* Aplica o escurecimento */
-
-}
