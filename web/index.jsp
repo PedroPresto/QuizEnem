@@ -40,7 +40,10 @@
                     <h2>Simulados Enem</h2>
 
                     <div class="exam-cards">
-                        <div class="exam-card" id="cardProvasAnteriores">
+
+                        <div class="exam-card" id="cardProvasAnteriores"
+                             style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('assets/anteriores.webp');">
+
                             <div class="exam-card-content">
                                 <div class="exam-card-header">
                                     <h3>Edições passadas do Enem</h3>
@@ -54,7 +57,12 @@
                             </div>
                         </div>
 
-                        <div class="exam-card" id="cardCriarSimulado">
+                        <!--
+                          Card "Criar Simulado" com a imagem de fundo aplicada diretamente.
+                        -->
+                        <div class="exam-card" id="cardCriarSimulado"
+                             style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('assets/criarSimulado.webp');">
+
                             <div class="exam-card-content">
                                 <div class="exam-card-header">
                                     <h3>Monte sua prova do seu jeito</h3>
@@ -68,6 +76,7 @@
                             </div>
                         </div>
                     </div>
+
 
                 </section>
 
