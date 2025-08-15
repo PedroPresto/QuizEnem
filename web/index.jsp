@@ -19,6 +19,9 @@
     <link rel="preload" as="image" href="assets/criarSimulado.webp">
     <link rel="preload" as="image" href="assets/anteriores.webp">
 
+    <script type="module" src="autenticacao/fragment/autenticacao.js" defer></script>
+    <script type="module" src="autenticacao/fragment/googleOAuth.js" defer></script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
 
 </head>
 <body>
@@ -65,6 +68,7 @@
                 <div class="exam-card" id="cardProvasAnteriores"
                      style="background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('assets/criarSimulador.webp');">
 
+                    <div class="free-tag">GRÁTIS!</div>
 
                     <div class="exam-card-content">
                         <div class="exam-card-header">
@@ -226,9 +230,7 @@
     </main>
 </div>
 
-<script type="module" src="autenticacao/fragment/autenticacao.js" defer></script>
-<script type="module" src="autenticacao/fragment/googleOAuth.js" defer></script>
-<script src="https://accounts.google.com/gsi/client" async defer></script>
+
 <script src="script.js"></script>
 <script type="module" src="cardsMaterias.js"></script>
 <script src="SalvarQuestoesBD.js"></script>
