@@ -4,6 +4,9 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
+    <link rel="preload" as="image" href="assets/criarSimulador.webp">
+    <link rel="preload" as="image" href="assets/anteriores.webp">
+
     <meta name="theme-color" content="#0F172A">
     <%@ include file="/includes/head.jsp" %>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,9 +18,22 @@
 
     <%-- login.css vai ser aplicado sempre que necessário --%>
     <link rel="stylesheet" href="css/index.css">
+
+    <style>
+        #cardCriarSimulado {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('assets/anteriores.webp');
+        }
+
+        #cardProvasAnteriores {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('assets/anteriores.webp');
+        }
+    </style>
+
+
+
+
     <link rel="stylesheet" href="autenticacao/fragment/login.css">
-    <link rel="preload" as="image" href="assets/criarSimulado.webp">
-    <link rel="preload" as="image" href="assets/anteriores.webp">
+
 
     <script type="module" src="autenticacao/fragment/autenticacao.js" defer></script>
     <script type="module" src="autenticacao/fragment/googleOAuth.js" defer></script>
