@@ -68,7 +68,7 @@ body {
 /* Animação e estilo para o ícone SVG */
 .logo svg {
     color: var(--primary-color);
-    width: 36px;  /* Levemente maior para mais destaque */
+    width: 36px; /* Levemente maior para mais destaque */
     height: 36px;
     animation: pulse-icon 2.5s infinite ease-in-out; /* Nova animação de pulsação */
 }
@@ -213,6 +213,42 @@ section h2::after {
     margin-bottom: var(--spacing-lg);
     color: var(--text-secondary);
     font-size: 0.9rem;
+}
+
+.free-tag {
+    width: 200px;
+    background: #28a745;
+    position: absolute;
+    top: 25px;
+    right: -50px;
+    text-align: center;
+    line-height: 35px; /* Altura da faixa */
+    letter-spacing: 1px;
+    color: #f0f0f0;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    box-shadow: 0 0 3px rgba(0, 0, 0, .3);
+    z-index: 10;
+    font-weight: bold;
+}
+
+/* Efeito de dobra adicionado com pseudo-elementos */
+.free-tag::before,
+.free-tag::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    border: 3px solid #1e7e34; /* Cor mais escura para a dobra */
+}
+
+.free-tag::before {
+    top: 0;
+    left: 0;
+}
+
+.free-tag::after {
+    bottom: 0;
+    right: 0;
 }
 
 /* Subjects Grid */
@@ -388,9 +424,75 @@ section h2::after {
     }
 
 
-
     section h2 {
         font-size: 1.25rem;
     }
 }
 
+
+/* Imagens de Fundo dos Cards de Matéria */
+#cardLinguagens {
+    background-image: url('../assets/linguagens.webp');
+}
+
+#cardMatematica {
+    background-image: url('../assets/matematica.webp');
+}
+
+#cardFisica {
+    background-image: url('../assets/fisica.webp');
+}
+
+#cardQuimica {
+    background-image: url('../assets/quimica.webp');
+}
+
+#cardBiologia {
+    background-image: url('../assets/biologia.webp');
+}
+
+#cardGeografia {
+    background-image: url('../assets/geografia.webp');
+}
+
+#cardHistoria {
+    background-image: url('../assets/historia.webp');
+}
+
+#cardSociologia {
+    background-image: url('../assets/sociologia.webp');
+}
+
+#cardFilosofia {
+    background-image: url('../assets/filosofia.webp');
+}
+
+#cardIngles {
+    background-image: url('../assets/ingles.webp');
+}
+
+#cardEspanhol {
+    background-image: url('../assets/espanhol.webp');
+}
+
+#cardLiteratura {
+    background-image: url('../assets/literatura.webp');
+}
+
+#cardArtes {
+    background-image: url('../assets/artes.webp');
+}
+
+#cardTI {
+    background-image: url('../assets/TI.webp');
+}
+
+#cardEF {
+    background-image: url('../assets/EF.webp');
+}
+
+/* Adiciona o gradiente a todos os cards de matéria de uma vez */
+.subject-card {
+    background-color: rgba(0, 0, 0, 0.4); /* Aplica o escurecimento */
+
+}

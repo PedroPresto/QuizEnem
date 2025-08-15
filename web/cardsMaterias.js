@@ -7,21 +7,21 @@ document.addEventListener("DOMContentLoaded", function () {
     const cardImages = {
       //  "cardProvasAnteriores": "assets/anteriores.webp",
       //  "cardCriarSimulado": "assets/criarSimulado.webp",
-        "cardLinguagens": "assets/linguagens.png",
-        "cardMatematica": "assets/matematica.png",
-        "cardFisica": "assets/fisica.png",
-        "cardQuimica": "assets/quimica.png",
-        "cardBiologia": "assets/biologia.png",
-        "cardGeografia": "assets/geografia.png",
-        "cardHistoria": "assets/historia.png",
-        "cardSociologia": "assets/sociologia.png",
-        "cardFilosofia": "assets/filosofia.png",
-        "cardIngles": "assets/ingles.png",
-        "cardEspanhol": "assets/espanhol.png",
-        "cardLiteratura": "assets/literatura.png", // <- Corrigido
-        "cardArtes": "assets/artes.png",         // <- Corrigido
-        "cardTI": "assets/TI.png",                // <- Corrigido
-        "cardEF": "assets/EF.png"                // <- Corrigido
+        "cardLinguagens": "assets/linguagens.webp",
+        "cardMatematica": "assets/matematica.webp",
+        "cardFisica": "assets/fisica.webp",
+        "cardQuimica": "assets/quimica.webp",
+        "cardBiologia": "assets/biologia.webp",
+        "cardGeografia": "assets/geografia.webp",
+        "cardHistoria": "assets/historia.webp",
+        "cardSociologia": "assets/sociologia.webp",
+        "cardFilosofia": "assets/filosofia.webp",
+        "cardIngles": "assets/ingles.webp",
+        "cardEspanhol": "assets/espanhol.webp",
+        "cardLiteratura": "assets/literatura.webp", // <- Corrigido
+        "cardArtes": "assets/artes.webp",         // <- Corrigido
+        "cardTI": "assets/TI.webp",                // <- Corrigido
+        "cardEF": "assets/EF.webp"                // <- Corrigido
     };
 
     // Loop para aplicar as imagens de fundo
