@@ -47,7 +47,7 @@ class Store {
    * @param {number} year - Year to be set (2019-2024)
    */
   setYear(year) {
-    if (year >= 2019 && year <= 2024) {
+    if (year >= 2009 && year <= 2024) {
       this.state.selectedYear = year;
       this.notify();
     }
