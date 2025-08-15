@@ -5,8 +5,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Objeto com todas as imagens dos cards (com as novas adições)
     const cardImages = {
-        "cardProvasAnteriores": "assets/anteriores.png",
-        "cardCriarSimulado": "assets/criarSimulado.png",
+        "cardProvasAnteriores": "assets/anteriores.wepb",
+        "cardCriarSimulado": "assets/criarSimulado.webp",
         "cardLinguagens": "assets/linguagens.png",
         "cardMatematica": "assets/matematica.png",
         "cardFisica": "assets/fisica.png",

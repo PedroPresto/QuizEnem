@@ -17,8 +17,10 @@
         <script type="module" src="autenticacao/fragment/autenticacao.js"></script>
         <script type="module" src="autenticacao/fragment/googleOAuth.js"></script>
         <script src="https://accounts.google.com/gsi/client" async defer></script>
+        <link rel="preload" as="image" href="assets/criarSimulado.webp">
+        <link rel="preload" as="image" href="assets/anteriores.webp">
 
-        
+
     </head>
     <body>
 
