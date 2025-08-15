@@ -14,8 +14,8 @@
         <%-- login.css vai ser aplicado sempre que necessário --%>
         <link rel="stylesheet" href="css/index.css">
         <link rel="stylesheet" href="autenticacao/fragment/login.css">
-        <script type="module" src="autenticacao/fragment/autenticacao.js"></script>
-        <script type="module" src="autenticacao/fragment/googleOAuth.js"></script>
+        <script type="module" src="autenticacao/fragment/autenticacao.js" defer></script>
+        <script type="module" src="autenticacao/fragment/googleOAuth.js" defer></script>
         <script src="https://accounts.google.com/gsi/client" async defer></script>
         <link rel="preload" as="image" href="assets/criarSimulado.webp">
         <link rel="preload" as="image" href="assets/anteriores.webp">
