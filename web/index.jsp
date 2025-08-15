@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="theme-color" content="#0F172A">
@@ -65,7 +65,6 @@
                 <div class="exam-card" id="cardProvasAnteriores"
                      style="background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('assets/criarSimulador.webp');">
 
-                    <div class="free-tag">GRÁTIS!</div>
 
                     <div class="exam-card-content">
                         <div class="exam-card-header">
