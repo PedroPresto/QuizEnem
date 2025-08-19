@@ -113,92 +113,92 @@
                 <div class="subject-card" id="cardLinguagens">
                     <i class="fa-solid fa-spell-check"></i>
                     <h3>Português</h3>
-                    <span>531 questões</span>
+                    <span>2531 questões</span>
                 </div>
 
                 <div class="subject-card" id="cardMatematica">
                     <i class="fa-solid fa-square-root-variable"></i>
                     <h3>Matemática</h3>
-                    <span>453 questões</span>
+                    <span>2453 questões</span>
                 </div>
 
                 <div class="subject-card" id="cardGeografia">
                     <i class="fa-solid fa-earth-americas"></i>
                     <h3>Geografia</h3>
-                    <span>186 questões</span>
+                    <span>2186 questões</span>
                 </div>
 
                 <div class="subject-card" id="cardHistoria">
                     <i class="fa-solid fa-calendar-check"></i>
                     <h3>História</h3>
-                    <span>294 questões</span>
+                    <span>2294 questões</span>
                 </div>
 
 
                 <div class="subject-card" id="cardFisica">
                     <i class="fa-solid fa-apple-whole"></i>
                     <h3>Fisica</h3>
-                    <span>215 questões</span>
+                    <span>1215 questões</span>
                 </div>
 
                 <div class="subject-card" id="cardQuimica">
                     <i class="fa-solid fa-vial-circle-check"></i>
                     <h3>Quimica</h3>
-                    <span>238 questões</span>
+                    <span>1238 questões</span>
                 </div>
 
                 <div class="subject-card" id="cardBiologia">
                     <i class="fa-solid fa-dna"></i>
                     <h3>Biologia</h3>
-                    <span>227 questões</span>
+                    <span>1227 questões</span>
                 </div>
 
                 <div class="subject-card" id="cardFilosofia">
                     <i class="fa-solid fa-landmark"></i>
                     <h3>Filosofia</h3>
-                    <span>194 questões</span>
+                    <span>1194 questões</span>
                 </div>
 
                 <div class="subject-card" id="cardSociologia">
                     <i class="fa-solid fa-users-viewfinder"></i>
                     <h3>Sociologia</h3>
-                    <span>224 questões</span>
+                    <span>1224 questões</span>
                 </div>
 
                 <div class="subject-card" id="cardIngles">
                     <i class="fa-solid fa-flag-usa"></i>
                     <h3>Inglês</h3>
-                    <span>198 questões</span>
+                    <span>998 questões</span>
                 </div>
 
                 <div class="subject-card" id="cardEspanhol">
                     <i class="fa-solid fa-pepper-hot"></i>
                     <h3>Espanhol</h3>
-                    <span>145 questões</span>
+                    <span>945 questões</span>
                 </div>
 
                 <div class="subject-card" id="cardLiteratura">
                     <i class="fa-solid fa-quote-left"></i>
                     <h3>Literatura</h3>
-                    <span>113 questões</span>
+                    <span>813 questões</span>
                 </div>
 
                 <div class="subject-card" id="cardArtes">
                     <i class="fa-solid fa-signature"></i>
                     <h3>Artes</h3>
-                    <span>203 questões</span>
+                    <span>903 questões</span>
                 </div>
 
                 <div class="subject-card" id="cardTI">
                     <i class="fa-solid fa-computer"></i>
                     <h3>T.I</h3>
-                    <span>120 questões</span>
+                    <span>920 questões</span>
                 </div>
 
                 <div class="subject-card" id="cardEF">
                     <i class="fa-solid fa-dumbbell"></i>
                     <h3>Ed. Física</h3>
-                    <span>104 questões</span>
+                    <span>604 questões</span>
                 </div>
 
             </div>
@@ -214,7 +214,7 @@
                         <path d="M12 20h9"/>
                         <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
                     </svg>
-                    <h3>Ciar Simulado Personalizado</h3>
+                    <h3>Criar Simulado Personalizado</h3>
                     <p>Escolha as matérias, o número de questões e personalize conforme sua estratégia.</p>
                     <button class="btn btn-outline" data-action="criarSimulado">Começar Personalização</button>
                 </div>
