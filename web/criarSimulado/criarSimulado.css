@@ -437,6 +437,196 @@ h2 {
     }
 }
 
+/* =================================================================== */
+/* === ESTILOS PARA O NOVO SELETOR HÍBRIDO (STEPPER) === */
+/* =================================================================== */
 
+.year-stepper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-12);
+}
+
+.stepper-arrow {
+    width: 40px;
+    height: 40px;
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    border-radius: var(--radius-md);
+    font-size: 1.5rem;
+    font-weight: var(--font-weight-bold);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color var(--transition-short), transform var(--transition-short);
+}
+
+.stepper-arrow:hover {
+    background-color: var(--primary-color-dark);
+    transform: scale(1.05);
+}
+
+.stepper-display-container {
+    position: relative; /* Essencial para posicionar o grid */
+}
+
+.stepper-display {
+    min-width: 120px;
+    padding: var(--space-8) var(--space-24);
+    background-color: var(--bg-input);
+    border: none;
+    border-radius: var(--radius-md);
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    font-weight: var(--font-weight-bold);
+    cursor: pointer;
+    transition: background-color var(--transition-short), box-shadow var(--transition-short);
+}
+
+.stepper-display:hover {
+    box-shadow: 0 0 0 2px var(--primary-color);
+}
+
+/* O grid de anos que aparece */
+.year-grid {
+    position: absolute;
+    top: calc(100% + 8px); /* Aparece abaixo do botão com um espaçamento */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 280px; /* Largura do painel */
+    background-color: var(--card-background);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+    padding: var(--space-12);
+    z-index: 10;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 colunas */
+    gap: var(--space-8);
+
+    /* Animação de entrada/saída */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-50%) translateY(-10px);
+    transition: opacity var(--transition-short), visibility var(--transition-short), transform var(--transition-short);
+}
+
+/* Classe que o JavaScript vai adicionar para mostrar o grid */
+.year-grid.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+
+.year-chip {
+    padding: var(--space-8);
+    color: var(--text-primary);
+    font-family: var(--font-family);
+    font-weight: var(--font-weight-medium);
+    font-size: 1rem;
+    background-color: var(--bg-input);
+    border: 1px solid transparent;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: background-color var(--transition-short), color var(--transition-short), border-color var(--transition-short);
+}
+
+.year-chip:hover {
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+}
+
+/* Estilo para o ano que está atualmente selecionado dentro do grid */
+.year-chip.active {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color-dark);
+    font-weight: var(--font-weight-bold);
+}
+
+
+/* =================================================================== */
+/* === ESTILOS ANTIGOS DO SLIDER (RECOMENDO REMOVER) === */
+/* =================================================================== */
+
+/*
+.slider-container {
+    position: relative;
+    padding: var(--space-16) 0;
+}
+
+.slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 6px;
+    background: var(--bg-input);
+    outline: none;
+    border-radius: var(--radius-md);
+    margin-bottom: var(--space-16);
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    cursor: pointer;
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--transition-short), background-color var(--transition-short);
+}
+
+.slider::-webkit-slider-thumb:hover {
+    transform: scale(1.1);
+    background: var(--primary-color-light);
+}
+
+.slider::-moz-range-thumb {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    cursor: pointer;
+    box-shadow: var(--shadow-sm);
+    border: none;
+    transition: transform var(--transition-short), background-color var(--transition-short);
+}
+
+.slider::-moz-range-thumb:hover {
+    transform: scale(1.1);
+    background: var(--primary-color-light);
+}
+
+.slider-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: var(--space-8);
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.year-display {
+    background-color: var(--bg-input);
+    border-radius: var(--radius-md);
+    padding: var(--space-8) var(--space-16);
+    display: block;
+    margin: var(--space-8) auto;
+    text-align: center;
+    align-items: center;
+}
+
+#selectedYear {
+    font-size: 1.5rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--primary-color);
+    transition: color var(--transition-medium);
+    text-align: center;
+    align-items: center;
+}
+*/
 
 

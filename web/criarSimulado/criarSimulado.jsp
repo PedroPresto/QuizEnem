@@ -28,28 +28,18 @@
 
                 <section class="year-selector">
                     <h2>Ano da Prova</h2>
-                    <div class="slider-container">
-                        <input type="range" min="2009" max="2023" value="2023" class="slider" id="yearSlider">
-                        <div class="slider-labels">
-                            <span>2009</span>
-                            <span>2010</span>
-                            <span>2011</span>
-                            <span>2012</span>
-                            <span>2013</span>
-                            <span>2014</span>
-                            <span>2015</span>
-                            <span>2016</span>
-                            <span>2017</span>
-                            <span>2018</span>
-                            <span>2019</span>
-                            <span>2020</span>
-                            <span>2021</span>
-                            <span>2022</span>
-                            <span>2023</span>
+
+                    <div class="year-stepper">
+                        <button id="prevYearBtn" class="stepper-arrow" aria-label="Ano anterior">&lt;</button>
+
+                        <div class="stepper-display-container">
+                            <button id="yearDisplayBtn" class="stepper-display">2023</button>
+
+                            <div id="yearGrid" class="year-grid hidden">
+                            </div>
                         </div>
-                        <div class="year-display">
-                            <span id="selectedYear">2023</span>
-                        </div>
+
+                        <button id="nextYearBtn" class="stepper-arrow" aria-label="Próximo ano">&gt;</button>
                     </div>
                 </section>
 
