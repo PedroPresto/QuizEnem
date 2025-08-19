@@ -78,7 +78,7 @@
 
         <script>
             document.addEventListener('DOMContentLoaded', () => {
-// Adiciona a classe 'fade-in' assim que a página estiver pronta
+// Adiciona a classe 'fade-in' assim que a página estiver prontaa
                 document.body.classList.add('fade-in');
             });
         </script>
