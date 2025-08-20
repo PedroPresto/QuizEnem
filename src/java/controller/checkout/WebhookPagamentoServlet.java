@@ -12,26 +12,27 @@ import javax.servlet.http.*;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.sql.*;
-import model.Usuario;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @WebServlet("/webhookPagamento")
 public class WebhookPagamentoServlet extends HttpServlet {
 
-    private static final String ENDPOINT_SECRET = "whsec_152MPtrOp8Bo7FgJanAiowfhjLNTtuK6";
+    private static final String ENDPOINT_SECRET = "whsec_n2SyMzjqFSk5I44vKgTZ4cqy8y4vigci";
+    private static final Logger LOGGER = Logger.getLogger(WebhookPagamentoServlet.class.getName());
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        System.out.println("🚨 Entrou no WebhookPagamentoServlet");
+        LOGGER.info("🚨 Recebido webhook do Stripe");
 
         String sigHeader = request.getHeader("Stripe-Signature");
-
         if (sigHeader == null) {
-            System.out.println("⚠️ Requisição sem assinatura Stripe!");
-            response.setStatus(400);
+            LOGGER.warning("⚠️ Requisição sem assinatura Stripe");
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return;
         }
 
-        // Lê o payload bruto corretamente
+        // Lê o payload bruto
         byte[] payloadBytes = request.getInputStream().readAllBytes();
         String payload = new String(payloadBytes, StandardCharsets.UTF_8);
 
@@ -39,31 +40,27 @@ public class WebhookPagamentoServlet extends HttpServlet {
         try {
             event = Webhook.constructEvent(payload, sigHeader, ENDPOINT_SECRET);
         } catch (SignatureVerificationException e) {
-            System.out.println("⚠️ Webhook com assinatura inválida!");
-            response.setStatus(400);
+            LOGGER.log(Level.WARNING, "⚠️ Webhook com assinatura inválida!", e);
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            return;
+        } catch (Exception e) {
+            LOGGER.log(Level.SEVERE, "💥 Erro ao processar webhook", e);
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             return;
         }
 
-        // Sucesso na validação da assinatura
-        System.out.println("✅ Webhook validado com sucesso!");
+        LOGGER.info("✅ Webhook validado com sucesso");
 
+        // Trata apenas eventos de checkout.completed
         if ("checkout.session.completed".equals(event.getType())) {
             EventDataObjectDeserializer deserializer = event.getDataObjectDeserializer();
-         
-            HttpSession sessao = request.getSession(true);
-            Usuario usuario = (Usuario) sessao.getAttribute("usuarioLogado");
-
-            if (usuario != null) {
-                usuario.setIsPremium(true); // Atualiza o status no próprio objeto
-                sessao.setAttribute("usuarioLogado", usuario); // Regrava na sessão (opcional se for o mesmo objeto)
-            }
 
             if (deserializer.getObject().isPresent()) {
                 Session session = (Session) deserializer.getObject().get();
                 String email = session.getCustomerEmail();
+                LOGGER.info("📧 Cliente: " + email);
 
-                System.out.println("📧 Cliente: " + email);
-
+                // Atualiza o status do usuário para Premium
                 try (Connection conn = DBConnection.getConnection()) {
                     PreparedStatement st = conn.prepareStatement(
                             "UPDATE usuarios SET ispremium = TRUE WHERE email = ?"
@@ -72,19 +69,19 @@ public class WebhookPagamentoServlet extends HttpServlet {
                     int linhas = st.executeUpdate();
 
                     if (linhas > 0) {
-                        System.out.println("🔥 Usuário " + email + " promovido a Premium!");
+                        LOGGER.info("🔥 Usuário " + email + " promovido a Premium!");
                     } else {
-                        System.out.println("⚠️ Nenhum usuário encontrado com o e-mail: " + email);
+                        LOGGER.warning("⚠️ Nenhum usuário encontrado com o e-mail: " + email);
                     }
 
                 } catch (SQLException e) {
-                    System.out.println("💥 Erro ao atualizar o banco: " + e.getMessage());
-                    e.printStackTrace();
+                    LOGGER.log(Level.SEVERE, "💥 Erro ao atualizar o banco de dados", e);
                 }
-
             }
+        } else {
+            LOGGER.info("ℹ️ Evento ignorado: " + event.getType());
         }
 
-        response.setStatus(200); // Confirma que o webhook foi processado com sucesso
+        response.setStatus(HttpServletResponse.SC_OK);
     }
 }
