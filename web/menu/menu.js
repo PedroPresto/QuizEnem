@@ -92,8 +92,8 @@ async function updateMenuContent(usuario) {
     isLoggedIn = usuario.isLoggedIn
     isAdmin = usuario.isAdmin;
 
-      // console.log("usuario menu2:", usuario);
-     // console.log("Tipo de usuário:", typeof usuario);
+    // console.log("usuario menu2:", usuario);
+    // console.log("Tipo de usuário:", typeof usuario);
     // console.log("Campos:", usuario?.nome, usuario?.id, usuario?.isLoggedIn);
 
     menu.innerHTML = ` 
@@ -308,7 +308,9 @@ function irRevisao() {
 function irRetomarSimulado() {
     let materia = localStorage.getItem("materia");
 
-    if (materia == null) { materia = "Simulado Personalizado"; }
+    if (materia == null) {
+        materia = "Simulado Personalizado";
+    }
 
     let qQntd = localStorage.getItem("qQntd");
     if (materia && qQntd) {
@@ -536,14 +538,8 @@ function goPremium() {
             // confirmButton: 'my-sw-confirm',
             // cancelButton: 'my-sw-cancel',
             htmlContainer: 'my-sw-text'
-        },
-        // opcionalmente, controle animações de show/hide se precisar de classes especiais:
-        showClass: {
-            popup: 'animate__animated animate__fadeIn' // já tem nossa animação via CSS
-        },
-        hideClass: {
-            popup: 'animate__animated animate__fadeOut animate__faster' // ou use outra animação
         }
+
     }).then((result) => {
         if (result.isConfirmed) {
             criarSessaoCheckout();
@@ -596,15 +592,27 @@ function handleMenuItemClick(e) {
             irRetomarSimulado();
             break;
         case 'criarSimulado':
-            window.location.href = contextPath + "/criarSimulado/simuladoLivre.jsp"; // <- sua função customizada
+            if (isLoggedIn) {
+                if (isPremium) {
+                    window.location.href = contextPath + "/criarSimulado/simuladoLivre.jsp"; // <- sua função customizada
+                } else {
+                    goPremium();
+                }
+            } else {
+                criarFormularioLogin();
+            }
             break;
         case 'perfil':
             window.location.href = contextPath + "/perfil.jsp"; // <- sua função customizada
-            break;
-        case 'logout':
+
+        case
+        'logout'
+        :
             fazerLogout();
             break;
-        case 'irAdminReview':
+        case
+        'irAdminReview'
+        :
             irAdminReview();
             break;
         default:
