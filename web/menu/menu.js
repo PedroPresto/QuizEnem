@@ -604,7 +604,7 @@ function handleMenuItemClick(e) {
             break;
         case 'perfil':
             window.location.href = contextPath + "/perfil.jsp"; // <- sua função customizada
-
+            break;
         case
         'logout'
         :
