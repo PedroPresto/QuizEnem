@@ -40,10 +40,12 @@ jobs:
             cd /home/${{ secrets.VPS_USERNAME }}/quiz-enem-app
             
             # Cria o ficheiro .env no servidor com os segredos do GitHub
-            echo "DB_ROOT_PASSWORD=${{ secrets.DB_ROOT_PASSWORD }}" > .env
-            echo "DB_DATABASE=${{ secrets.DB_DATABASE }}" >> .env
-            echo "DB_USER=${{ secrets.DB_USER }}" >> .env
-            echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
+            cat <<'EOF' > .env
+            DB_ROOT_PASSWORD=${{ secrets.DB_ROOT_PASSWORD }}
+            DB_DATABASE=${{ secrets.DB_DATABASE }}
+            DB_USER=${{ secrets.DB_USER }}
+            DB_PASSWORD=${{ secrets.DB_PASSWORD }}
+            EOF
             
             # ▼▼▼ COMANDO ADICIONADO ABAIXO ▼▼▼
             # Garante que os containers antigos são parados e removidos antes de começar.
